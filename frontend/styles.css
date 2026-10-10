@@ -1,0 +1,406 @@
+:root {
+    --blue-50: #f0f8ff;
+    --blue-100: #dbeeff;
+    --blue-200: #b9dfff;
+    --blue-300: #7cc4fa;
+    --blue-500: #2b7bd6;
+    --blue-600: #1f63b5;
+    --blue-900: #0d3b66;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Form controls don't inherit the page font by default */
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Google Sans Flex", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--blue-900);
+    background: linear-gradient(180deg, var(--blue-100) 0%, var(--blue-50) 50%, var(--white) 100%);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 16px 32px;
+    background: var(--white);
+    border-bottom: 3px solid var(--blue-300);
+    box-shadow: 0 2px 8px rgba(13, 59, 102, 0.08);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 56px;
+    height: 35px;
+}
+
+.logo-text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--blue-900);
+    letter-spacing: 0.5px;
+}
+
+.logo-accent {
+    color: var(--blue-500);
+}
+
+/* Two-panel layout */
+.split {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 8vw;
+}
+
+/* Left panel */
+.panel-about {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    /* Leave room at the bottom so the text sits above the road.
+       The ground art is 280/720 of the panel's width (50vw) tall. */
+    padding-bottom: calc(50vw * 280 / 720 + 24px);
+}
+
+/* Background art sits behind the text */
+.scene-sky,
+.scene-ground {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+}
+
+.scene-sky {
+    top: 0;
+    height: 100%;
+}
+
+/* Ground scales with the panel's width so it's never cropped */
+.scene-ground {
+    bottom: 0;
+    aspect-ratio: 720 / 280;
+}
+
+.panel-about h1 {
+    margin: 0 0 12px;
+    font-size: 2.4rem;
+    line-height: 1.2;
+}
+
+.tagline {
+    margin: 0 0 20px;
+    font-size: 1.2rem;
+    color: var(--blue-600);
+}
+
+.panel-about p {
+    line-height: 1.6;
+}
+
+.features {
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.features li {
+    position: relative;
+    padding: 8px 0 8px 32px;
+}
+
+.features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--blue-100);
+    color: var(--blue-500);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 22px;
+}
+
+/* Right panel */
+/* Right panel fills the whole right half of the screen */
+.panel-auth {
+    align-items: center;
+    background: var(--blue-500);
+    color: var(--white);
+}
+
+.panel-auth {
+    text-align: center;
+}
+
+.panel-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.panel-logo-icon {
+    width: 120px;
+    height: 75px;
+}
+
+.panel-logo-text {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.panel-logo-accent {
+    color: var(--blue-100);
+}
+
+.panel-auth h2 {
+    margin: 0 0 8px;
+    font-size: 1.6rem;
+}
+
+.panel-auth p {
+    margin: 0 0 28px;
+    color: var(--blue-100);
+    line-height: 1.5;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.actions .btn {
+    text-align: center;
+}
+
+/* Buttons flipped to stand out on the solid blue panel */
+.panel-auth .btn-primary {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--blue-600);
+}
+
+.panel-auth .btn-primary:hover {
+    background: var(--blue-100);
+    border-color: var(--blue-100);
+}
+
+.panel-auth .btn-secondary {
+    background: transparent;
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.panel-auth .btn-secondary:hover {
+    background: var(--blue-600);
+}
+
+/* Buttons */
+.btn {
+    min-width: 140px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-primary {
+    background: var(--blue-500);
+    color: var(--white);
+    border: 2px solid var(--blue-500);
+}
+
+.btn-primary:hover {
+    background: var(--blue-600);
+    border-color: var(--blue-600);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--blue-500);
+    border: 2px solid var(--blue-500);
+}
+
+.btn-secondary:hover {
+    background: var(--blue-100);
+}
+
+/* Login / register pages: blue panel holding a white form card */
+.panel-form {
+    align-items: center;
+    background: var(--blue-500);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 36px 32px;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(13, 59, 102, 0.25);
+}
+
+.auth-card h2 {
+    margin: 0 0 6px;
+    font-size: 1.6rem;
+}
+
+.auth-card .subtitle {
+    margin: 0 0 24px;
+    color: var(--blue-600);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--blue-200);
+    border-radius: 8px;
+    background: var(--blue-50);
+    color: var(--blue-900);
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--blue-500);
+    box-shadow: 0 0 0 3px var(--blue-100);
+}
+
+/* Show/hide button sits inside the password box */
+.password-wrap {
+    position: relative;
+}
+
+.password-wrap input {
+    padding-right: 64px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    padding: 4px 6px;
+    background: none;
+    border: none;
+    color: var(--blue-500);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.form-message {
+    min-height: 1.4em;
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    color: var(--blue-600);
+}
+
+.form-message.error {
+    color: #c5221f;
+}
+
+.auth-card .btn {
+    width: 100%;
+    cursor: pointer;
+}
+
+.form-switch {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--blue-600);
+}
+
+.form-switch a {
+    color: var(--blue-500);
+    font-weight: 600;
+}
+
+/* Footer */
+.footer {
+    padding: 16px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--blue-600);
+}
+
+/* Stack the panels on smaller screens */
+@media (max-width: 800px) {
+    .split {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        padding: 40px 16px;
+    }
+
+    /* Panel is full width (100vw) when stacked */
+    .panel-about {
+        padding-bottom: calc(100vw * 280 / 720 + 24px);
+    }
+
+    .panel-about h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 12px 16px;
+    }
+}

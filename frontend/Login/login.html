@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carswich</title>
+    <title>Login | Carswich</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <header class="navbar">
-        <a href="index.html" class="logo">
+        <a href="../index.html" class="logo">
             <svg class="logo-icon" viewBox="0 0 64 40" aria-hidden="true">
                 <path d="M6 28 L10 17 Q12 12 18 12 L40 12 Q45 12 49 17 L54 22 Q60 23 60 28 L60 30 L6 30 Z" fill="#2b7bd6"/>
                 <path d="M16 17 Q17 15 20 15 L29 15 L29 22 L13 22 Z M32 15 L39 15 Q43 15 46 19 L48 22 L32 22 Z" fill="#dbeeff"/>
@@ -26,21 +27,9 @@
     </header>
 
     <main class="split">
-        <!-- Left panel: about the website -->
         <section class="panel panel-about">
-            <h1>Find your next car with <span class="logo-accent">Carswich</span></h1>
-            <p class="tagline">Browse cars from trusted dealers and buy with confidence.</p>
-            <p>
-                Carswich connects buyers with local car dealers in one place. Search listings,
-                compare prices and mileage, and buy your next car without the runaround.
-            </p>
-
-            <ul class="features">
-                <li><strong>Browse listings</strong> from dealers near you</li>
-                <li><strong>Compare</strong> make, model, year, mileage and price</li>
-                <li><strong>Buy securely</strong> straight from your account</li>
-                <li><strong>Sell as a dealer</strong> and reach more buyers</li>
-            </ul>
+            <h1>Welcome back to <span class="logo-accent">Carswich</span></h1>
+            <p class="tagline">Log in to keep browsing listings and manage your purchases.</p>
 
             <!-- Background art: sky fills the panel, ground runs along the bottom -->
             <svg class="scene-sky" viewBox="0 0 720 800" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
@@ -97,28 +86,38 @@
             </svg>
         </section>
 
-        <!-- Right panel: login / register -->
-        <section class="panel panel-auth">
-            <!-- White version of the logo so it shows up on the blue panel -->
-            <div class="panel-logo">
-                <svg class="panel-logo-icon" viewBox="0 0 64 40" aria-hidden="true">
-                    <path d="M6 28 L10 17 Q12 12 18 12 L40 12 Q45 12 49 17 L54 22 Q60 23 60 28 L60 30 L6 30 Z" fill="#ffffff"/>
-                    <path d="M16 17 Q17 15 20 15 L29 15 L29 22 L13 22 Z M32 15 L39 15 Q43 15 46 19 L48 22 L32 22 Z" fill="#7cc4fa"/>
-                    <circle cx="18" cy="30" r="6" fill="#0d3b66"/>
-                    <circle cx="18" cy="30" r="2.5" fill="#ffffff"/>
-                    <circle cx="48" cy="30" r="6" fill="#0d3b66"/>
-                    <circle cx="48" cy="30" r="2.5" fill="#ffffff"/>
-                    <path d="M2 36 Q32 42 62 36" stroke="#dbeeff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                </svg>
-                <span class="panel-logo-text">Car<span class="panel-logo-accent">swich</span></span>
-            </div>
+        <section class="panel panel-form">
+            <div class="auth-card">
+                <h2>Login</h2>
+                <p class="subtitle">Enter your details to access your account.</p>
 
-            <h2>Get started</h2>
-            <p>Log in to your account, or create one to start browsing and buying.</p>
+                <form id="login-form" novalidate>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" autocomplete="email" required>
+                    </div>
 
-            <div class="actions">
-                <a href="Login/login.html" class="btn btn-primary">Login</a>
-                <a href="Register/register.html" class="btn btn-secondary">Register</a>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-wrap">
+                            <input type="password" id="password" name="password" autocomplete="current-password" required>
+                            <button type="button" class="toggle-password" data-target="password">Show</button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember">
+                            <input type="checkbox" name="remember"> Remember me
+                        </label>
+                        <a href="#">Forgot password?</a>
+                    </div>
+
+                    <p class="form-message" id="form-message" aria-live="polite"></p>
+
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+
+                <p class="form-switch">Don't have an account? <a href="../Register/register.html">Register</a></p>
             </div>
         </section>
     </main>
@@ -127,6 +126,6 @@
         <p>&copy; 2026 Carswich</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>
