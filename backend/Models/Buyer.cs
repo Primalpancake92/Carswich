@@ -1,10 +1,11 @@
 using System;
 
-namespace backend.models
+namespace backend.Models
 {
     public class Buyer : User
     {
-        private decimal _balance;
+        public decimal Balance { get; set; }
+
         public Buyer() : base() { }
 
         public Buyer(
@@ -12,36 +13,31 @@ namespace backend.models
             string phoneNumber, string address, decimal balance
         ) : base (userId, fullName, email, password, phoneNumber, address)
         {
-            _balance = balance;
-        }
-
-        public decimal GetBalance()
-        {
-            return _balance;
+            Balance = balance;
         }
 
         public bool Buy(Car car)
         {
-            if (_balance < car.GetPrice())
+            if (Balance < car.Price)
             {
                 Console.WriteLine("You do not have enough money to buy this car");
                 return false;
             }
 
-            if (car.GetQuantity() <= 0)
+            if (car.Quantity <= 0)
             {
                 Console.WriteLine(
                     @"There is no stock for the {0} {1}",
-                    car.GetMake(), car.GetModel()
+                    car.Make, car.Model
                 );
             }
 
-            _balance -= car.GetPrice();
+            Balance -= car.Price;
             car.DeductQuantity();
-            
+
             Console.WriteLine(
                 @"Car {0}, {1} has been bought",
-                car.GetMake(), car.GetModel()
+                car.Make, car.Model
             );
 
             return true;
@@ -49,7 +45,7 @@ namespace backend.models
 
         public override void ToString()
         {
-            Console.WriteLine($"Buyer {GetUserId()}: balance {_balance}");
+            Console.WriteLine($"Buyer {UserId}: balance {Balance}");
         }
     }
 }
