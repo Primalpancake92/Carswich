@@ -15,12 +15,34 @@ namespace backend.Models
         public Dealer(
             int userId, string fullName, string email, string password, 
             string phoneNumber, string address, string dealershipName, 
-            decimal balance, List<Car> carsAvailable
+            decimal balance
         ) : base (userId, fullName, email, password, phoneNumber, address)
         {
             DealershipName = dealershipName;
             Balance = balance;
-            CarsAvailable = carsAvailable;
+        }
+
+        public void BalanceDeposit(decimal money)
+        {
+            if (money <= 0)
+            {
+                Console.WriteLine("Invalid balance");
+                throw new ArgumentException("Balance must be greater than 0");
+            }
+
+            Balance += money;
+        }
+
+        public List<Car> GetAvailableCars()
+        {
+            List<Car> carsAvailable = new List<Car>();
+
+            
+        }
+
+        public bool OwnsThisCar(Car car)
+        {
+            return car.DealerId == 0;
         }
 
         public override void ToString()

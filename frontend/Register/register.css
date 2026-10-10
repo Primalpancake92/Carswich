@@ -2,6 +2,12 @@
 .auth-card {
     max-width: 520px;
     padding: 28px 32px;
+    /* Light blue glow all around: offset 0 0, then blur radius and spread.
+       Big blur + small spread keeps it smooth and subtle.
+       --blue-300 (tree blue) at half strength: lighter than the panel, so it
+       draws the eye without being harsh. */
+    box-shadow:
+        0 0 80px 16px rgba(124, 196, 250, 0.5);
 }
 
 .auth-card .subtitle {
@@ -61,6 +67,11 @@
 .account-type input:focus-visible + label {
     outline: 2px solid var(--blue-300);
     outline-offset: 2px;
+}
+
+/* .form-group is display: flex, which would override the hidden attribute */
+.form-group[hidden] {
+    display: none;
 }
 
 /* Email and phone side by side */
