@@ -11,6 +11,7 @@ namespace backend.models
         private string _colour;
         private decimal _price;
         private string _description;
+        private int _quantity;
         private bool _isSold;
 
         public Car()
@@ -133,6 +134,26 @@ namespace backend.models
         public void SetDescription(string description)
         {
             _description = description;
+        }
+
+        public int GetQuantity()
+        {
+            return _quantity;
+        }
+
+        public void DeductQuantity()
+        {
+            _quantity--;
+        }
+
+        public void AddQuantity()
+        {
+            _quantity++;
+        }
+
+        public void SetQuantity(int quantity)
+        {
+            _quantity = quantity;
         }
 
         public bool GetIsSold()

@@ -1,0 +1,30 @@
+/* "Remember me" and "Forgot password?" row */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: -4px 0 12px;
+    font-size: 0.9rem;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.remember input {
+    accent-color: var(--blue-500);
+}
+
+.form-options a {
+    color: var(--blue-500);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.form-options a:hover {
+    text-decoration: underline;
+}
