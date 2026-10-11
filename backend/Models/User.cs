@@ -27,6 +27,6 @@ namespace backend.Models
             Address = address;
         }
 
-        public abstract void ToString();
+        public virtual void PrintDetails() {}
     }
 }

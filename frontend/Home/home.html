@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Carswich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../Shared/app.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header class="navbar">
+        <!-- Left: logo icon, then profile pic and name after a divider -->
+        <a href="../Home/home.html" class="logo" aria-label="Carswich dashboard">
+            <svg class="logo-icon" viewBox="0 0 64 40" aria-hidden="true">
+                <path d="M6 28 L10 17 Q12 12 18 12 L40 12 Q45 12 49 17 L54 22 Q60 23 60 28 L60 30 L6 30 Z" fill="#2b7bd6"/>
+                <path d="M16 17 Q17 15 20 15 L29 15 L29 22 L13 22 Z M32 15 L39 15 Q43 15 46 19 L48 22 L32 22 Z" fill="#dbeeff"/>
+                <circle cx="18" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="18" cy="30" r="2.5" fill="#ffffff"/>
+                <circle cx="48" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="48" cy="30" r="2.5" fill="#ffffff"/>
+                <path d="M2 36 Q32 42 62 36" stroke="#7cc4fa" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </a>
+
+        <div class="nav-user">
+            <span class="avatar" data-user="initials" aria-hidden="true"></span>
+            <span class="nav-user-name" data-user="fullName"></span>
+        </div>
+
+        <!-- Right: page links. The current page is marked with aria-current="page" -->
+        <nav class="nav-links" aria-label="Main menu">
+            <a href="../Home/home.html" class="nav-link" aria-current="page">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+                Dashboard
+            </a>
+            <a href="../Browse/browse.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20 L16 16"/></svg>
+                Browse cars
+            </a>
+            <a href="../Account/account.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21 Q4 14 12 14 Q20 14 20 21"/></svg>
+                Account
+            </a>
+        </nav>
+
+        <!-- Far right: log out -->
+        <a href="../index.html" class="btn btn-secondary btn-small nav-logout">Log out</a>
+    </header>
+
+    <div class="layout with-side">
+        <!-- Left: welcome, summary and newest cars -->
+        <main class="content">
+            <div class="welcome">
+                <div>
+                    <h1>Welcome back, <span data-user="firstName"></span></h1>
+                    <p class="tagline">Here's what's happening on Carswich today.</p>
+                </div>
+                <a href="../Browse/browse.html" class="btn btn-primary">Browse cars</a>
+            </div>
+
+            <div class="stats">
+                <article class="stat-card">
+                    <p class="stat-label">Balance</p>
+                    <p class="stat-value" data-stat="balance"></p>
+                    <p class="stat-note">Available to spend</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">Cars for sale</p>
+                    <p class="stat-value" data-stat="available"></p>
+                    <p class="stat-note">Across all dealers</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">Dealers</p>
+                    <p class="stat-value" data-stat="dealers"></p>
+                    <p class="stat-note">Listing on Carswich</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">Cars bought</p>
+                    <p class="stat-value" data-stat="purchases"></p>
+                    <p class="stat-note" data-stat="spent"></p>
+                </article>
+            </div>
+
+            <div class="card-panel">
+                <div class="panel-header">
+                    <h2>Newest listings</h2>
+                    <a href="../Browse/browse.html" class="text-link">See all cars</a>
+                </div>
+                <div class="car-grid" id="featured-grid"></div>
+            </div>
+        </main>
+
+        <!-- Right: account info and cars bought -->
+        <aside class="account-side">
+            <div class="card-panel profile">
+                <span class="avatar avatar-large" data-user="initials" aria-hidden="true"></span>
+                <h2 data-user="fullName"></h2>
+                <p class="badge" data-user="userType"></p>
+
+                <dl class="profile-details">
+                    <div>
+                        <dt>Email</dt>
+                        <dd data-user="email"></dd>
+                    </div>
+                    <div>
+                        <dt>Phone</dt>
+                        <dd data-user="phoneNumber"></dd>
+                    </div>
+                    <div>
+                        <dt>Address</dt>
+                        <dd data-user="address"></dd>
+                    </div>
+                    <div>
+                        <dt>Balance</dt>
+                        <dd class="profile-balance" data-stat="balance"></dd>
+                    </div>
+                </dl>
+
+                <a href="../Account/account.html#details" class="btn btn-secondary btn-small">Edit account</a>
+            </div>
+
+            <div class="card-panel bought-panel">
+                <div class="panel-header">
+                    <h2>Cars bought</h2>
+                    <a href="../Account/account.html#purchases" class="text-link">View all</a>
+                </div>
+                <ol class="history thin-scroll" id="history-list" tabindex="0" aria-label="Cars bought"></ol>
+                <p class="empty" id="no-history" hidden>No cars bought yet.</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Toast message after buying a car -->
+    <p class="toast" id="toast" role="status" aria-live="polite"></p>
+
+    <footer class="footer">
+        <p>&copy; 2026 Carswich</p>
+    </footer>
+
+    <script src="../Shared/app.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>

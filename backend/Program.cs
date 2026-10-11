@@ -1,6 +1,17 @@
+using backend.DAL;
+using backend.Routes.Buyers;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddValidation();
+
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.MapBuyerRegRoute();
+
 
 app.Run();

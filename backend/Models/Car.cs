@@ -3,7 +3,7 @@ namespace backend.Models
     public class Car
     {
         public int CarId { get; set; }
-        public int DealerId { get; set; }
+        public int? DealerId { get; set; }
         public string Make { get; set; } = "";
         public string Model { get; set; } = "";
         public int Year { get; set; }
@@ -14,7 +14,7 @@ namespace backend.Models
         public int Quantity { get; set; }
         public bool IsSold { get; set; }
 
-        public Car() { }
+        public Car() {}
 
         public Car(
             int carId, int dealerId, string make, string model, int year,

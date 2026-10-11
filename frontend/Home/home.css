@@ -1,0 +1,260 @@
+/* Dashboard page only. Navbar, layout and car cards are in ../Shared/app.css. */
+
+.account-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+}
+
+/* Welcome banner */
+/* Heading, tagline and button stacked in the centre */
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 32px;
+    text-align: center;
+    border-radius: 16px;
+    background: var(--blue-500);
+    color: var(--white);
+    box-shadow: 0 12px 28px rgba(13, 59, 102, 0.2);
+}
+
+.welcome h1 {
+    margin: 0 0 6px;
+    font-size: 2rem;
+}
+
+.welcome .tagline {
+    margin: 0;
+    color: var(--blue-100);
+}
+
+/* Same flipped button as the blue panel on the landing page */
+.welcome .btn-primary {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--blue-600);
+    white-space: nowrap;
+}
+
+.welcome .btn-primary:hover {
+    background: var(--blue-100);
+    border-color: var(--blue-100);
+}
+
+/* Summary cards */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+.stat-card {
+    padding: 20px;
+    text-align: center;
+    background: var(--white);
+    border: 1px solid var(--blue-100);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(13, 59, 102, 0.06);
+}
+
+.stat-value {
+    margin: 6px 0 4px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-note {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--blue-600);
+}
+
+/* Right column: profile card */
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.avatar-large {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+}
+
+.profile h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.badge {
+    margin: 6px 0 16px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: var(--blue-100);
+    color: var(--blue-600);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.profile-details {
+    width: 100%;
+    margin: 0 0 16px;
+    text-align: left;
+}
+
+.profile-details div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--blue-100);
+}
+
+.profile-details dt {
+    font-size: 0.85rem;
+    color: var(--blue-600);
+}
+
+.profile-details dd {
+    margin: 0;
+    font-size: 0.9rem;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.profile-balance {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.profile .btn {
+    width: 100%;
+    text-align: center;
+}
+
+/* Right column stretches to the height of the left column, so the bottom of
+   Cars bought lines up with the bottom of Newest listings */
+.layout.with-side {
+    align-items: stretch;
+}
+
+/* Cars bought fills whatever height is left under the profile card */
+.bought-panel {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Right column: cars bought timeline.
+   contain: size stops the list's length from making the column taller;
+   it just fills the space left and scrolls (scrollbar from .thin-scroll in app.css). */
+.history {
+    flex: 1;
+    min-height: 140px;
+    contain: size;
+    margin: 0 -12px 0 0;
+    padding: 0 12px 0 0;
+    list-style: none;
+}
+
+.history li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--blue-100);
+}
+
+.history li:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+.history-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 48px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--blue-50);
+}
+
+.history-icon svg {
+    width: 38px;
+    height: 24px;
+}
+
+.history-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.history-car {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.history-meta {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: var(--blue-600);
+}
+
+.history-price {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Medium screens: profile and cars bought sit side by side under the panel.
+   Nothing to line up with any more, so the list gets a fixed max height instead. */
+@media (max-width: 1000px) {
+    .account-side {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+
+    .history {
+        flex: none;
+        min-height: 0;
+        max-height: 320px;
+        contain: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .account-side {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome {
+        padding: 24px;
+    }
+
+    .welcome h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-value {
+        font-size: 1.3rem;
+    }
+}
