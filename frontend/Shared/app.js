@@ -1,24 +1,23 @@
-// Shared by every logged-in page (Home, Browse, Purchases, Wallet, Account).
+// Shared by every logged-in page (Home, Browse, Account).
 // Load this before the page's own script.
 
 // TODO: replace this sample data with fetch() calls once the backend routes exist,
 // e.g. GET /api/me, GET /api/cars, GET /api/dealers, GET /api/purchases.
 // Field names match the C# models (camelCase, which is how ASP.NET sends JSON).
 const sampleData = {
-    buyer: {
-        userId: 1,
-        userType: "Buyer",
-        fullName: "Alex Taylor",
-        email: "alex@example.com",
-        phoneNumber: "0412 345 678",
-        address: "12 Harbour St, Sydney",
-        balance: 45000,
-    },
+    // Who is logged in. See the ?as= switch below.
+    currentUserId: 1,
+
+    buyers: [
+        { userId: 1, userType: "Buyer", fullName: "Alex Taylor", email: "alex@example.com", phoneNumber: "0412 345 678", address: "12 Harbour St, Sydney", balance: 45000 },
+        { userId: 2, userType: "Buyer", fullName: "Sam Lee", email: "sam@example.com", phoneNumber: "0423 456 789", address: "4 Ocean Rd, Manly", balance: 30000 },
+        { userId: 3, userType: "Buyer", fullName: "Priya Patel", email: "priya@example.com", phoneNumber: "0434 567 890", address: "88 King St, Newtown", balance: 52000 },
+    ],
 
     dealers: [
-        { userId: 10, dealershipName: "Harbour Motors" },
-        { userId: 11, dealershipName: "Northside Autos" },
-        { userId: 12, dealershipName: "Bluewater Cars" },
+        { userId: 10, userType: "Dealer", fullName: "Jordan Smith", dealershipName: "Harbour Motors", email: "jordan@harbourmotors.example", phoneNumber: "02 9555 1000", address: "200 Harbour St, Sydney", balance: 120000 },
+        { userId: 11, userType: "Dealer", fullName: "Chris Wong", dealershipName: "Northside Autos", email: "chris@northside.example", phoneNumber: "02 9555 2000", address: "15 Pacific Hwy, Chatswood", balance: 85000 },
+        { userId: 12, userType: "Dealer", fullName: "Taylor Brown", dealershipName: "Bluewater Cars", email: "taylor@bluewater.example", phoneNumber: "02 9555 3000", address: "7 Beach Rd, Bondi", balance: 64000 },
     ],
 
     cars: [
@@ -32,15 +31,18 @@ const sampleData = {
         { carId: 8, dealerId: 12, make: "Kia", model: "Picanto", year: 2017, mileage: 82000, colour: "Yellow", price: 8900, description: "Cheap to run city car.", quantity: 0, isSold: true },
     ],
 
+    // Matches backend/Models/Purchase.cs: who bought which car from which dealer
     purchases: [
-        { carId: 7, date: "2026-09-21", price: 39900 },
-        { carId: 8, date: "2026-03-04", price: 8900 },
+        { buyerId: 1, dealerId: 10, carId: 7, date: "2026-09-21", price: 39900 },
+        { buyerId: 1, dealerId: 12, carId: 8, date: "2026-03-04", price: 8900 },
+        { buyerId: 2, dealerId: 10, carId: 1, date: "2026-08-02", price: 21500 },
+        { buyerId: 3, dealerId: 10, carId: 2, date: "2026-06-15", price: 28900 },
     ],
 };
 
 // Each page is a separate HTML file, so changes (buying, deposits, account edits)
 // are kept in sessionStorage to carry over between pages until the backend exists.
-const storageKey = "carswich-sample-data";
+const storageKey = "carswich-sample-data-v2";
 
 function loadData() {
     try {
@@ -61,7 +63,20 @@ function saveData() {
 }
 
 const data = loadData();
-const { buyer, dealers, cars, purchases } = data;
+const { buyers, dealers, cars, purchases } = data;
+
+// Sample login: add ?as=dealer or ?as=buyer to any page's URL to switch who is logged in.
+// The choice is saved, so it stays when moving between pages.
+// TODO: use the user returned by the login route instead.
+const switchTo = new URLSearchParams(location.search).get("as");
+if (switchTo === "dealer" || switchTo === "buyer") {
+    data.currentUserId = (switchTo === "dealer" ? dealers : buyers)[0].userId;
+    saveData();
+}
+
+// The logged-in user: a Buyer or a Dealer (userType says which)
+const currentUser = [...buyers, ...dealers].find(user => user.userId === data.currentUserId);
+const isDealer = currentUser.userType === "Dealer";
 
 // Colour names from the database mapped to a paint colour for the car picture
 const paint = {
@@ -74,6 +89,11 @@ const number = new Intl.NumberFormat("en-US");
 
 const el = id => document.getElementById(id);
 const all = selector => document.querySelectorAll(selector);
+
+function buyerName(buyerId) {
+    const buyer = buyers.find(b => b.userId === buyerId);
+    return buyer ? buyer.fullName : "Unknown buyer";
+}
 
 function dealerName(dealerId) {
     const dealer = dealers.find(d => d.userId === dealerId);
@@ -147,8 +167,9 @@ function renderBackground() {
                 </g>
             </svg>
 
-            <!-- Ground: hills, trees and a road along the bottom -->
-            <svg class="page-ground" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice">
+            <!-- Ground: hills, trees and a road. The road is the bottom edge,
+                 so it sits right on top of the footer. -->
+            <svg class="page-ground" viewBox="0 0 1440 162" preserveAspectRatio="xMidYMax slice">
                 <g fill="#7cc4fa">
                     <rect x="117" y="40" width="6" height="70"/>
                     <rect x="1297" y="30" width="6" height="80"/>
@@ -158,12 +179,11 @@ function renderBackground() {
                 <circle cx="1300" cy="22" r="20" fill="#b9dfff"/>
                 <circle cx="1340" cy="38" r="13" fill="#7cc4fa"/>
 
-                <path d="M0 80 Q180 30 360 70 T720 60 T1080 55 T1440 50 V220 H0 Z" fill="#dbeeff"/>
-                <path d="M0 115 Q240 85 480 108 T960 100 T1440 98 V220 H0 Z" fill="#b9dfff" opacity="0.7"/>
+                <path d="M0 80 Q180 30 360 70 T720 60 T1080 55 T1440 50 V162 H0 Z" fill="#dbeeff"/>
+                <path d="M0 115 Q240 85 480 108 T960 100 T1440 98 V162 H0 Z" fill="#b9dfff" opacity="0.7"/>
 
                 <rect x="0" y="132" width="1440" height="30" fill="#7cc4fa" opacity="0.55"/>
                 <line x1="0" y1="147" x2="1440" y2="147" stroke="#ffffff" stroke-width="3" stroke-dasharray="26 22"/>
-                <rect x="0" y="162" width="1440" height="58" fill="#dbeeff"/>
 
                 <g stroke="#7cc4fa" stroke-width="3" stroke-linecap="round">
                     <line x1="200" y1="128" x2="240" y2="128"/>
@@ -179,11 +199,11 @@ renderBackground();
 
 // ---------- Rendering used on several pages ----------
 
-// Fill every element marked data-user="field" with that field of the buyer
+// Fill every element marked data-user="field" with that field of the logged-in user
 function renderUser() {
-    const names = buyer.fullName.trim().split(/\s+/);
+    const names = currentUser.fullName.trim().split(/\s+/);
     const values = {
-        ...buyer,
+        ...currentUser,
         firstName: names[0],
         initials: names.map(part => part[0]).join("").slice(0, 2).toUpperCase(),
     };
@@ -199,14 +219,17 @@ function availableCars() {
 
 // Fill every element marked data-stat="name" with that summary value
 function renderStats() {
-    const spent = purchases.reduce((total, p) => total + p.price, 0);
+    const bought = purchaseHistory();
+    const spent = bought.reduce((total, p) => total + p.price, 0);
+    const earned = salesHistory().reduce((total, p) => total + p.price, 0);
 
     const values = {
-        balance: money.format(buyer.balance),
+        balance: money.format(currentUser.balance),
         available: number.format(availableCars().length),
         dealers: number.format(dealers.length),
-        purchases: number.format(purchases.length),
+        purchases: number.format(bought.length),
         spent: `${money.format(spent)} spent in total`,
+        earned: `${money.format(earned)} earned in total`,
     };
 
     all("[data-stat]").forEach(node => {
@@ -215,7 +238,7 @@ function renderStats() {
 }
 
 function carCard(car) {
-    const canAfford = buyer.balance >= car.price;
+    const canAfford = currentUser.balance >= car.price;
 
     return `
         <article class="car-card">
@@ -242,11 +265,21 @@ function carCard(car) {
         </article>`;
 }
 
-// Purchases newest first, with their car attached
-function purchaseHistory() {
-    return [...purchases]
+// Newest first, with each purchase's car attached
+function withCars(list) {
+    return [...list]
         .sort((a, b) => b.date.localeCompare(a.date))
         .map(p => ({ ...p, car: cars.find(c => c.carId === p.carId) }));
+}
+
+// Cars the logged-in user has bought
+function purchaseHistory() {
+    return withCars(purchases.filter(p => p.buyerId === currentUser.userId));
+}
+
+// Cars the logged-in dealer has sold
+function salesHistory() {
+    return withCars(purchases.filter(p => p.dealerId === currentUser.userId));
 }
 
 // ---------- Messages ----------
@@ -275,7 +308,7 @@ function showFormMessage(id, text, isError) {
 function buyCar(carId) {
     const car = cars.find(c => c.carId === carId);
 
-    if (buyer.balance < car.price) {
+    if (currentUser.balance < car.price) {
         showToast("You don't have enough money to buy this car.", true);
         return false;
     }
@@ -285,11 +318,17 @@ function buyCar(carId) {
         return false;
     }
 
-    buyer.balance -= car.price;
+    currentUser.balance -= car.price;
     car.quantity--;
     if (car.quantity === 0) car.isSold = true;
 
-    purchases.push({ carId: car.carId, date: new Date().toISOString().slice(0, 10), price: car.price });
+    purchases.push({
+        buyerId: currentUser.userId,
+        dealerId: car.dealerId,
+        carId: car.carId,
+        date: new Date().toISOString().slice(0, 10),
+        price: car.price,
+    });
     saveData();
 
     showToast(`You bought the ${car.year} ${car.make} ${car.model}!`, false);

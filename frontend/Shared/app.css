@@ -136,12 +136,16 @@
     height: 100%;
 }
 
+/* Bottom edge (the road) sits exactly on top of the footer.
+   Grows with the screen width so wide screens don't crop the treetops;
+   on narrow screens it stays 162px tall and the sides are cropped instead. */
 .page-ground {
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: var(--footer-height);
     width: 100%;
-    height: 220px;
+    aspect-ratio: 1440 / 162;
+    min-height: 162px;
 }
 
 .layout.with-side {
@@ -355,9 +359,11 @@ form .btn {
 }
 
 /* Footer: always pinned to the bottom of the screen.
-   White with a blue top edge, mirroring the navbar. */
+   White with a blue top edge, mirroring the navbar.
+   Same height as the landing page footer (styles.css: 16px padding around the
+   paragraph's 14.4px margins and one line of text), including the 3px top border. */
 :root {
-    --footer-height: 52px;
+    --footer-height: 79px;
 }
 
 /* Room at the end of the page so the footer never covers content */
@@ -374,14 +380,9 @@ body {
     display: grid;
     place-items: center;
     height: var(--footer-height);
-    padding: 0 16px;
     background: var(--white);
     border-top: 3px solid var(--blue-300);
     box-shadow: 0 -2px 8px rgba(13, 59, 102, 0.08);
-}
-
-.footer p {
-    margin: 0;
 }
 
 /* Toast message after buying a car (sits just above the footer) */

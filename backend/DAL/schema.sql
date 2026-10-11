@@ -9,7 +9,7 @@
 
 -- Buyers and Dealers share one table.
 -- UserType says which class a row is; columns only one type uses are NULL for the other.
-CREATE TABLE "Users" (
+CREATE TABLE Users (
     "UserId"         INTEGER NOT NULL CONSTRAINT "PK_Users" PRIMARY KEY AUTOINCREMENT,
     "FullName"       TEXT    NOT NULL,
     "Email"          TEXT    NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE "Users" (
 
 -- Each car points at the dealer that listed it (DealerId).
 -- A dealer's "list of cars" is: SELECT * FROM Cars WHERE DealerId = ?
-CREATE TABLE "Cars" (
+CREATE TABLE Cars (
     "CarId"       INTEGER NOT NULL CONSTRAINT "PK_Cars" PRIMARY KEY AUTOINCREMENT,
     "DealerId"    INTEGER NULL,
     "Make"        TEXT    NOT NULL,

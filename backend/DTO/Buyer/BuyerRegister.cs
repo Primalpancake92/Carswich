@@ -10,8 +10,14 @@ namespace backend.DTO
         [Required, MinLength(8), MaxLength(50)] string Password
     );
 
-    public record BuyerRegisterResponse(
-        int UserId,
+    public record BuyerRegisterSuccessResponse(
+        string Status,
+        Dictionary<string, string> Body,
+        string Message
+    );
+
+    public record BuyerRegisterErrResponse(
+        string Status,
         string Message
     );
 }

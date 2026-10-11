@@ -4,7 +4,7 @@ namespace backend.utils
 {
     public static class StringFormatter
     {
-        public string Capitalise(string input)
+        public static string Capitalise(string input)
         {
             string result;
             char firstChar = char.ToUpper(input[0]);

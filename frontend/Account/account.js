@@ -30,7 +30,7 @@ const accountFields = ["fullName", "email", "phoneNumber", "address"];
 function fillAccountForm() {
     const form = el("account-form");
     accountFields.forEach(field => {
-        form[field].value = buyer[field];
+        form[field].value = currentUser[field];
     });
 }
 
@@ -56,23 +56,32 @@ el("account-form").addEventListener("submit", event => {
         return;
     }
 
-    Object.assign(buyer, changes);
+    Object.assign(currentUser, changes);
     saveData();
 
     showFormMessage("account-message", "Your details have been saved.", false);
     renderUser();
 });
 
-// ---------- Purchase history ----------
+// ---------- Purchase history (buyers) / Sales history (dealers) ----------
+
+// Dealers see the cars they've sold and who bought them, instead of cars they've bought
+function useSalesLabels() {
+    el("history-tab-label").textContent = "Sales history";
+    el("history-title").textContent = "Sales history";
+    el("history-party").textContent = "Buyer";
+    el("history-total").dataset.stat = "earned";
+    el("no-purchases").textContent = "You haven't sold any cars yet.";
+}
 
 function renderPurchases() {
-    const history = purchaseHistory();
+    const history = isDealer ? salesHistory() : purchaseHistory();
 
     el("no-purchases").hidden = history.length > 0;
-    el("purchase-rows").innerHTML = history.map(({ car, date, price }) => `
+    el("purchase-rows").innerHTML = history.map(({ car, buyerId, dealerId, date, price }) => `
         <tr>
             <td>${car.year} ${escapeHtml(car.make)} ${escapeHtml(car.model)}</td>
-            <td>${escapeHtml(dealerName(car.dealerId))}</td>
+            <td>${escapeHtml(isDealer ? buyerName(buyerId) : dealerName(dealerId))}</td>
             <td>${number.format(car.mileage)} km</td>
             <td>${formatDate(date)}</td>
             <td class="num">${money.format(price)}</td>
@@ -104,13 +113,15 @@ el("deposit-form").addEventListener("submit", event => {
         return;
     }
 
-    buyer.balance += amount;
+    currentUser.balance += amount;
     saveData();
 
     input.value = "";
     showFormMessage("deposit-message", `Added ${money.format(amount)} to your balance.`, false);
     renderStats();
 });
+
+if (isDealer) useSalesLabels();
 
 renderUser();
 renderStats();

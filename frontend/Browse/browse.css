@@ -62,7 +62,7 @@
     min-height: 0;
     /* Same space above and below, so the panel is centred between the navbar and
        footer. 88px also keeps it clear of the road in the background art
-       (app.js renderBackground), which starts 80px above the bottom of .layout. */
+       (app.js renderBackground), which sits on top of the footer. */
     padding-top: 88px;
     padding-bottom: 88px;
 }
