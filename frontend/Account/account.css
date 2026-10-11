@@ -1,0 +1,299 @@
+/* Account page only: tabs on the left, the selected section on the right. */
+
+/* stretch: the side card and the open tab are always the same height */
+.account-layout {
+    grid-template-columns: 260px minmax(0, 1fr);
+    align-items: stretch;
+}
+
+/* Left: profile picture above the tab list */
+.account-menu {
+    padding: 12px;
+}
+
+.menu-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 12px 20px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--blue-100);
+    text-align: center;
+}
+
+.avatar-large {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+}
+
+.menu-profile-name {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.badge {
+    display: inline-block;
+    margin: 6px 0 0;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: var(--blue-100);
+    color: var(--blue-600);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tab-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-left: 3px solid transparent;
+    border-radius: 0 8px 8px 0;
+    color: var(--blue-900);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab-link svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tab-link:hover {
+    background: var(--blue-50);
+    color: var(--blue-500);
+}
+
+/* showTab() in account.js marks the open tab with aria-current="page" */
+.tab-link[aria-current="page"] {
+    border-left-color: var(--blue-500);
+    background: var(--blue-50);
+    color: var(--blue-500);
+}
+
+/* The open tab's card fills the column */
+.tab-panels {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.tab-panels > .card-panel {
+    flex: 1;
+    padding: 32px;
+}
+
+/* Account details: two fields per row, message and button on their own rows */
+.account-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+}
+
+.account-form .form-message,
+.account-form .btn {
+    grid-column: 1 / -1;
+}
+
+.account-form .btn {
+    justify-self: start;
+}
+
+/* Purchase history: table scrolls sideways on small screens instead of squashing */
+.table-wrap {
+    overflow-x: auto;
+}
+
+.purchases-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.purchases-table th,
+.purchases-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--blue-100);
+    white-space: nowrap;
+}
+
+.purchases-table th {
+    font-size: 0.85rem;
+    color: var(--blue-600);
+}
+
+.purchases-table .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.purchases-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Wallet */
+.wallet-balance {
+    margin-bottom: 24px;
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+}
+
+.wallet-amount {
+    margin: 4px 0 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.wallet-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.wallet-form .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Amount box with − and + buttons: one bordered box that looks like the other inputs */
+.stepper {
+    display: flex;
+    border: 1px solid var(--blue-200);
+    border-radius: 8px;
+    background: var(--blue-50);
+    overflow: hidden;
+}
+
+/* Same focus ring as .form-group input in styles.css, but around the whole box */
+.stepper:focus-within {
+    border-color: var(--blue-500);
+    box-shadow: 0 0 0 3px var(--blue-100);
+}
+
+.form-group .stepper input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+    -moz-appearance: textfield;
+}
+
+.form-group .stepper input:focus {
+    box-shadow: none;
+}
+
+/* Hide the browser's own up/down arrows */
+.stepper input::-webkit-outer-spin-button,
+.stepper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.stepper-btn {
+    flex-shrink: 0;
+    width: 44px;
+    border: none;
+    background: var(--white);
+    color: var(--blue-500);
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.stepper-btn:first-child {
+    border-right: 1px solid var(--blue-200);
+}
+
+.stepper-btn:last-child {
+    border-left: 1px solid var(--blue-200);
+}
+
+.stepper-btn:hover {
+    background: var(--blue-100);
+    color: var(--blue-600);
+}
+
+.wallet .form-message {
+    margin: 12px 0 0;
+}
+
+/* Small screens: tabs become a sideways-scrolling row above the section */
+@media (max-width: 800px) {
+    .account-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .account-menu {
+        padding: 8px;
+    }
+
+    /* Profile becomes a compact row: small picture beside the name */
+    .menu-profile {
+        flex-direction: row;
+        gap: 12px;
+        padding: 8px 8px 12px;
+        text-align: left;
+    }
+
+    .avatar-large {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 0;
+        font-size: 1.1rem;
+    }
+
+    .tabs {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .tab-link {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .tab-link[aria-current="page"] {
+        border-bottom-color: var(--blue-500);
+    }
+}
+
+@media (max-width: 600px) {
+    .account-form {
+        grid-template-columns: 1fr;
+    }
+
+    .tab-panels > .card-panel {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wallet-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

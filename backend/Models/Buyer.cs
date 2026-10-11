@@ -43,7 +43,7 @@ namespace backend.Models
             return true;
         }
 
-        public override void ToString()
+        public override void PrintDetails()
         {
             Console.WriteLine($"Buyer {UserId}: balance {Balance}");
         }

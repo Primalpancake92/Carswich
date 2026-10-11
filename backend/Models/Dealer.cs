@@ -37,7 +37,7 @@ namespace backend.Models
         {
             List<Car> carsAvailable = new List<Car>();
 
-            
+            throw new NotImplementedException("To be implemented");
         }
 
         public bool OwnsThisCar(Car car)
@@ -45,7 +45,7 @@ namespace backend.Models
             return car.DealerId == 0;
         }
 
-        public override void ToString()
+        public override void PrintDetails()
         {
             throw new NotImplementedException();
         }

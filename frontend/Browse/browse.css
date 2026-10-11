@@ -1,0 +1,99 @@
+/* Browse cars page only. Car cards are in ../Shared/app.css. */
+
+/* Filters reuse .form-group from styles.css */
+.filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.filters .form-group {
+    margin-bottom: 0;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--blue-200);
+    border-radius: 8px;
+    background: var(--blue-50);
+    color: var(--blue-900);
+    font-size: 1rem;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--blue-500);
+    box-shadow: 0 0 0 3px var(--blue-100);
+}
+
+/* Medium screens: search on its own row, the three dropdowns below */
+@media (max-width: 1000px) {
+    .filters {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .filters .form-group:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .filters {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Scrolling car list ----------
+   The page is exactly one screen tall: the panel fills the space between the navbar
+   and footer, and only .car-scroll scrolls. */
+.browse-page {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+/* stretch: the panel fills the full width (app.css sets align-items: start) */
+.browse-page .layout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    /* Same space above and below, so the panel is centred between the navbar and
+       footer. 88px also keeps it clear of the road in the background art
+       (app.js renderBackground), which starts 80px above the bottom of .layout. */
+    padding-top: 88px;
+    padding-bottom: 88px;
+}
+
+.browse-panel {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Scrollbar look comes from .thin-scroll in ../Shared/app.css */
+.car-scroll {
+    flex: 1;
+    min-height: 0;
+    /* Room for the cards' hover lift and the scrollbar */
+    margin: -4px -12px 0 0;
+    padding: 4px 12px 4px 0;
+}
+
+/* Phones and short windows: too little height for a scroll box,
+   so go back to the whole page scrolling */
+@media (max-width: 800px), (max-height: 600px) {
+    .browse-page {
+        height: auto;
+        overflow: visible;
+    }
+
+    .car-scroll {
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+    }
+}

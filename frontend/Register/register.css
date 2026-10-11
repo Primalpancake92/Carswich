@@ -30,45 +30,6 @@
     margin-bottom: 4px;
 }
 
-/* Buyer / Dealer switch */
-.account-type {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    margin-bottom: 16px;
-    padding: 4px;
-    background: var(--blue-50);
-    border: 1px solid var(--blue-200);
-    border-radius: 10px;
-}
-
-/* Hide the radio circles; the labels act as the buttons */
-.account-type input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.account-type label {
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 600;
-    color: var(--blue-600);
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-}
-
-.account-type input:checked + label {
-    background: var(--blue-500);
-    color: var(--white);
-}
-
-.account-type input:focus-visible + label {
-    outline: 2px solid var(--blue-300);
-    outline-offset: 2px;
-}
-
 /* .form-group is display: flex, which would override the hidden attribute */
 .form-group[hidden] {
     display: none;

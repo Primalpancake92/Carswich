@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse cars | Carswich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../Shared/app.css">
+    <link rel="stylesheet" href="browse.css">
+</head>
+<body class="browse-page">
+    <header class="navbar">
+        <!-- Left: logo icon, then profile pic and name after a divider -->
+        <a href="../Home/home.html" class="logo" aria-label="Carswich dashboard">
+            <svg class="logo-icon" viewBox="0 0 64 40" aria-hidden="true">
+                <path d="M6 28 L10 17 Q12 12 18 12 L40 12 Q45 12 49 17 L54 22 Q60 23 60 28 L60 30 L6 30 Z" fill="#2b7bd6"/>
+                <path d="M16 17 Q17 15 20 15 L29 15 L29 22 L13 22 Z M32 15 L39 15 Q43 15 46 19 L48 22 L32 22 Z" fill="#dbeeff"/>
+                <circle cx="18" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="18" cy="30" r="2.5" fill="#ffffff"/>
+                <circle cx="48" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="48" cy="30" r="2.5" fill="#ffffff"/>
+                <path d="M2 36 Q32 42 62 36" stroke="#7cc4fa" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </a>
+
+        <div class="nav-user">
+            <span class="avatar" data-user="initials" aria-hidden="true"></span>
+            <span class="nav-user-name" data-user="fullName"></span>
+        </div>
+
+        <!-- Right: page links. The current page is marked with aria-current="page" -->
+        <nav class="nav-links" aria-label="Main menu">
+            <a href="../Home/home.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+                Dashboard
+            </a>
+            <a href="../Browse/browse.html" class="nav-link" aria-current="page">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20 L16 16"/></svg>
+                Browse cars
+            </a>
+            <a href="../Account/account.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21 Q4 14 12 14 Q20 14 20 21"/></svg>
+                Account
+            </a>
+        </nav>
+
+        <!-- Far right: log out -->
+        <a href="../index.html" class="btn btn-secondary btn-small nav-logout">Log out</a>
+    </header>
+
+    <main class="layout">
+        <div class="card-panel browse-panel">
+            <div class="panel-header">
+                <h1>Available cars</h1>
+                <p class="muted" id="results-count" aria-live="polite"></p>
+            </div>
+
+            <form class="filters" id="filters">
+                <div class="form-group">
+                    <label for="search">Search</label>
+                    <input type="search" id="search" placeholder="Make, model or colour">
+                </div>
+                <div class="form-group">
+                    <label for="make">Make</label>
+                    <select id="make">
+                        <option value="">All makes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="max-price">Max price</label>
+                    <select id="max-price">
+                        <option value="">Any price</option>
+                        <option value="15000">Under $15,000</option>
+                        <option value="25000">Under $25,000</option>
+                        <option value="40000">Under $40,000</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sort">Sort by</label>
+                    <select id="sort">
+                        <option value="newest">Newest first</option>
+                        <option value="price-asc">Price: low to high</option>
+                        <option value="price-desc">Price: high to low</option>
+                        <option value="mileage">Lowest mileage</option>
+                    </select>
+                </div>
+            </form>
+
+            <!-- Only this part scrolls; the title and filters stay in place above it -->
+            <div class="car-scroll thin-scroll" tabindex="0" aria-label="Car listings">
+                <div class="car-grid" id="car-grid"></div>
+                <p class="empty" id="no-results" hidden>No cars match your filters.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast message after buying a car -->
+    <p class="toast" id="toast" role="status" aria-live="polite"></p>
+
+    <footer class="footer">
+        <p>&copy; 2026 Carswich</p>
+    </footer>
+
+    <script src="../Shared/app.js"></script>
+    <script src="browse.js"></script>
+</body>
+</html>

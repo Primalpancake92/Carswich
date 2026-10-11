@@ -11,6 +11,7 @@ namespace backend.DAL
         public DbSet<Buyer> Buyers => Set<Buyer>();
         public DbSet<Dealer> Dealers => Set<Dealer>();
         public DbSet<Car> Cars => Set<Car>();
+        public DbSet<Purchase> Purchases => Set<Purchase>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +62,31 @@ namespace backend.DAL
                 car.Property(c => c.Colour).HasMaxLength(30);
                 car.Property(c => c.Description).HasMaxLength(2000);
                 car.Property(c => c.Price).HasConversion<double>();
+            });
+
+            modelBuilder.Entity<Purchase>(purchase =>
+            {
+
+                purchase.ToTable("Purchases");
+                purchase.HasKey(pur => pur.PurchaseId);
+
+                purchase.Property(pur => pur.PaidAmount).IsRequired().HasConversion<double>();
+                purchase.Property(pur => pur.PurchaseDate).IsRequired();
+
+                purchase.HasOne<Car>()
+                    .WithMany()
+                    .HasForeignKey(pur => pur.CarId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                purchase.HasOne<Buyer>()
+                    .WithMany()
+                    .HasForeignKey(pur => pur.BuyerId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                purchase.HasOne<Dealer>()
+                    .WithMany()
+                    .HasForeignKey(pur => pur.DealerId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }

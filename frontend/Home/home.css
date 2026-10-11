@@ -1,133 +1,10 @@
-/* Navbar: profile pic + name | logo (centred) | Log out.
-   Equal 1fr side columns keep the logo in the exact centre. */
-.navbar {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 16px;
-}
+/* Dashboard page only. Navbar, layout and car cards are in ../Shared/app.css. */
 
-.nav-user {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-self: start;
-    min-width: 0;
-}
-
-.nav-logout {
-    justify-self: end;
-}
-
-.avatar {
-    display: grid;
-    flex-shrink: 0;
-    place-items: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: var(--blue-500);
-    color: var(--white);
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-.nav-user-name {
-    font-weight: 600;
-}
-
-.btn-small {
-    min-width: 0;
-    padding: 8px 16px;
-    font-size: 0.9rem;
-}
-
-/* Three columns: side menu | selected panel | account info */
-.layout {
-    flex: 1;
-    display: grid;
-    /* Side columns are the same width so the middle panel sits in the page centre */
-    grid-template-columns: 280px minmax(0, 1fr) 280px;
-    align-items: start;
-    /* Centre the columns vertically between the navbar and footer
-       (body is a flex column, so .layout fills the leftover height) */
-    align-content: center;
-    gap: 24px;
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 24px;
-}
-
-/* Left side menu */
-.sidebar {
-    position: sticky;
-    top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 16px 12px;
-    background: var(--white);
-    border: 1px solid var(--blue-100);
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(13, 59, 102, 0.06);
-}
-
-.sidebar-title {
-    margin: 0 0 8px;
-    padding: 0 12px;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--blue-600);
-}
-
-.side-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    color: var(--blue-900);
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background 0.2s, color 0.2s;
-}
-
-.side-link svg {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.side-link:hover {
-    background: var(--blue-50);
-    color: var(--blue-600);
-}
-
-.side-link.active {
-    background: var(--blue-500);
-    color: var(--white);
-}
-
-/* Middle column */
-.content,
-.panel-view,
 .account-side {
     display: flex;
     flex-direction: column;
     gap: 24px;
     min-width: 0;
-}
-
-.panel-view[hidden] {
-    display: none;
 }
 
 /* Welcome banner */
@@ -175,24 +52,13 @@
     gap: 16px;
 }
 
-.stat-card,
-.card-panel {
+.stat-card {
+    padding: 20px;
+    text-align: center;
     background: var(--white);
     border: 1px solid var(--blue-100);
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(13, 59, 102, 0.06);
-}
-
-.stat-card {
-    padding: 20px;
-    text-align: center;
-}
-
-.stat-label {
-    margin: 0;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--blue-600);
 }
 
 .stat-value {
@@ -206,258 +72,6 @@
     margin: 0;
     font-size: 0.85rem;
     color: var(--blue-600);
-}
-
-/* White panels */
-.card-panel {
-    padding: 24px;
-}
-
-.panel-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.panel-header h2 {
-    margin: 0;
-    font-size: 1.3rem;
-}
-
-.muted {
-    margin: 0;
-    color: var(--blue-600);
-    font-size: 0.9rem;
-}
-
-.text-link {
-    color: var(--blue-500);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.text-link:hover {
-    text-decoration: underline;
-}
-
-/* Filters reuse .form-group from styles.css */
-.filters {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.filters .form-group {
-    margin-bottom: 0;
-}
-
-.form-group select {
-    width: 100%;
-    padding: 11px 12px;
-    border: 1px solid var(--blue-200);
-    border-radius: 8px;
-    background: var(--blue-50);
-    color: var(--blue-900);
-    font-size: 1rem;
-}
-
-.form-group select:focus {
-    outline: none;
-    border-color: var(--blue-500);
-    box-shadow: 0 0 0 3px var(--blue-100);
-}
-
-/* Car cards */
-.car-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 16px;
-}
-
-.car-card {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border: 1px solid var(--blue-100);
-    border-radius: 12px;
-    background: var(--white);
-    transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.car-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(13, 59, 102, 0.12);
-}
-
-.car-image {
-    display: grid;
-    place-items: center;
-    height: 120px;
-    background: linear-gradient(180deg, var(--blue-100) 0%, var(--blue-50) 100%);
-}
-
-.car-image svg {
-    width: 140px;
-    height: 88px;
-}
-
-.car-body {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: 16px;
-}
-
-.car-title {
-    margin: 0;
-    font-size: 1.05rem;
-}
-
-.car-dealer {
-    margin: 2px 0 10px;
-    font-size: 0.85rem;
-    color: var(--blue-600);
-}
-
-.car-specs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 0 0 10px;
-    padding: 0;
-    list-style: none;
-}
-
-.car-specs li {
-    padding: 3px 10px;
-    border-radius: 999px;
-    background: var(--blue-50);
-    border: 1px solid var(--blue-100);
-    font-size: 0.8rem;
-}
-
-.car-description {
-    flex: 1;
-    margin: 0 0 14px;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: var(--blue-600);
-}
-
-.car-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-.car-price {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-}
-
-.car-stock {
-    margin: 0;
-    font-size: 0.8rem;
-    color: var(--blue-600);
-}
-
-.car-footer .btn {
-    min-width: 0;
-    padding: 8px 18px;
-    cursor: pointer;
-}
-
-.car-footer .btn:disabled {
-    background: var(--blue-100);
-    border-color: var(--blue-100);
-    color: var(--blue-600);
-    cursor: not-allowed;
-}
-
-/* Purchases table */
-.table-wrap {
-    overflow-x: auto;
-}
-
-.purchases-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.purchases-table th,
-.purchases-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid var(--blue-100);
-    white-space: nowrap;
-}
-
-.purchases-table th {
-    font-size: 0.85rem;
-    color: var(--blue-600);
-}
-
-.purchases-table .num {
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-}
-
-.purchases-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.empty {
-    margin: 16px 0 0;
-    text-align: center;
-    color: var(--blue-600);
-}
-
-/* Wallet and account forms */
-.wallet-balance {
-    margin-bottom: 24px;
-    padding: 20px;
-    border-radius: 12px;
-    background: var(--blue-50);
-    border: 1px solid var(--blue-100);
-}
-
-.wallet-amount {
-    margin: 4px 0 0;
-    font-size: 2.2rem;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-}
-
-.wallet-form {
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
-}
-
-.wallet-form .form-group {
-    flex: 1;
-    margin-bottom: 0;
-}
-
-.wallet-form .btn,
-.account-form .btn {
-    cursor: pointer;
-}
-
-.wallet .form-message {
-    margin: 12px 0 0;
-}
-
-.account-form {
-    max-width: 520px;
 }
 
 /* Right column: profile card */
@@ -526,10 +140,29 @@
     text-align: center;
 }
 
-/* Right column: cars bought timeline */
+/* Right column stretches to the height of the left column, so the bottom of
+   Cars bought lines up with the bottom of Newest listings */
+.layout.with-side {
+    align-items: stretch;
+}
+
+/* Cars bought fills whatever height is left under the profile card */
+.bought-panel {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Right column: cars bought timeline.
+   contain: size stops the list's length from making the column taller;
+   it just fills the space left and scrolls (scrollbar from .thin-scroll in app.css). */
 .history {
-    margin: 0;
-    padding: 0;
+    flex: 1;
+    min-height: 140px;
+    contain: size;
+    margin: 0 -12px 0 0;
+    padding: 0 12px 0 0;
     list-style: none;
 }
 
@@ -585,75 +218,25 @@
     font-variant-numeric: tabular-nums;
 }
 
-/* Toast */
-.toast {
-    position: fixed;
-    left: 50%;
-    bottom: 24px;
-    margin: 0;
-    padding: 12px 20px;
-    border-radius: 8px;
-    background: var(--blue-900);
-    color: var(--white);
-    box-shadow: 0 8px 20px rgba(13, 59, 102, 0.3);
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, 12px);
-    transition: opacity 0.2s, transform 0.2s;
-}
-
-.toast.show {
-    opacity: 1;
-    transform: translate(-50%, 0);
-}
-
-.toast.error {
-    background: #c5221f;
-}
-
-/* Medium screens: account info drops below the panel */
-@media (max-width: 1150px) {
-    .layout {
-        grid-template-columns: 200px minmax(0, 1fr);
-    }
-
+/* Medium screens: profile and cars bought sit side by side under the panel.
+   Nothing to line up with any more, so the list gets a fixed max height instead. */
+@media (max-width: 1000px) {
     .account-side {
-        grid-column: 2;
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-items: start;
     }
 
-    .filters {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .filters .form-group:first-child {
-        grid-column: 1 / -1;
+    .history {
+        flex: none;
+        min-height: 0;
+        max-height: 320px;
+        contain: none;
     }
 }
 
-/* Small screens: side menu becomes a scrolling tab bar along the top */
 @media (max-width: 800px) {
-    .layout {
-        grid-template-columns: minmax(0, 1fr);
-        padding: 16px;
-        gap: 16px;
-    }
-
-    .sidebar {
-        position: static;
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 8px;
-    }
-
-    .sidebar-title {
-        display: none;
-    }
-
     .account-side {
-        grid-column: auto;
         grid-template-columns: 1fr;
     }
 
@@ -664,49 +247,14 @@
     .welcome h1 {
         font-size: 1.5rem;
     }
-
-    .nav-user-name {
-        display: none;
-    }
 }
 
 @media (max-width: 480px) {
-    /* Smaller logo so it fits between the profile pic and Log out */
-    .navbar {
-        gap: 8px;
-    }
-
-    .logo {
-        gap: 6px;
-    }
-
-    .logo-icon {
-        width: 40px;
-        height: 25px;
-    }
-
-    .logo-text {
-        font-size: 1.25rem;
-    }
-
-    .nav-logout {
-        white-space: nowrap;
-    }
-
-    .filters {
-        grid-template-columns: 1fr;
-    }
-
     .stats {
         grid-template-columns: 1fr 1fr;
     }
 
     .stat-value {
         font-size: 1.3rem;
-    }
-
-    .wallet-form {
-        flex-direction: column;
-        align-items: stretch;
     }
 }

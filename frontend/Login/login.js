@@ -11,6 +11,20 @@ document.querySelectorAll(".toggle-password").forEach(button => {
     });
 });
 
+// Buyer / Dealer switch: keep the button text in step with the selected account type
+const loginButton = document.getElementById("login-button");
+
+function updateLoginButton() {
+    loginButton.textContent = `Log in as a ${form.accountType.value}`;
+}
+
+form.querySelectorAll("input[name='accountType']").forEach(radio => {
+    radio.addEventListener("change", updateLoginButton);
+});
+
+// The browser can remember "dealer" when you come back to the page
+updateLoginButton();
+
 function showMessage(text, isError) {
     message.textContent = text;
     message.classList.toggle("error", isError);
@@ -19,6 +33,7 @@ function showMessage(text, isError) {
 form.addEventListener("submit", event => {
     event.preventDefault();
 
+    const accountType = form.accountType.value;   // "buyer" or "dealer"
     const email = form.email.value.trim();
     const password = form.password.value;
 
@@ -32,6 +47,6 @@ form.addEventListener("submit", event => {
         return;
     }
 
-    // TODO: send { email, password } to the backend once the login API route exists
-    showMessage("Login isn't connected to the backend yet.", false);
+    // TODO: send { accountType, email, password } to the backend once the login API route exists
+    showMessage(`${accountType === "dealer" ? "Dealer" : "Buyer"} login isn't connected to the backend yet.`, false);
 });
