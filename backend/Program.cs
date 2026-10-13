@@ -14,4 +14,5 @@ var app = builder.Build();
 app.MapBuyerRegRoute();
 
 
+
 app.Run();
