@@ -78,25 +78,7 @@ form.addEventListener("submit", event => {
     }
 
     // TODO: send data to the backend once the register API route exists
-    //showMessage("Registration isn't connected to the backend yet.", false);
+    showMessage("Registration isn't connected to the backend yet.", false);
     
-    // send registration data to backend (no other changes required)
-    fetch(`http://localhost:3000/api/${data.accountType}s/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(async res => {
-        const body = await res.json().catch(() => ({}));
-        if (!res.ok) {
-            showMessage(body.message || body.error || "Registration failed.", true);
-            return;
-        }
-        showMessage("Registration successful. Redirecting to login…", false);
-        setTimeout(() => window.location.href = "../Login/login.html", 900);
-    })
-    .catch(err => {
-        console.error("Registration error:", err);
-        showMessage("Network error. Make sure the backend is running.", true);
-    });
+    
 });
