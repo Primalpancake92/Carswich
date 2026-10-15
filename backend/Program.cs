@@ -26,6 +26,7 @@ app.UseCors("Frontend");
 
 app.MapBuyerRegRoute();
 app.MapCarBrowseRoute();
+app.MapCarDetailsRoute();
 
 
 app.Run();
