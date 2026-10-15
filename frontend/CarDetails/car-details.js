@@ -106,6 +106,11 @@ function renderCar(car) {
 
         </div>
     `;
+
+    el("buy-button").addEventListener("click", () => {
+    window.location.href =
+        `../Purchase/purchase.html?id=${car.carId}`;
+    });
 }
 
 

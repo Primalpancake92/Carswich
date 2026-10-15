@@ -1,0 +1,48 @@
+.purchase-layout {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 24px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.purchase-panel {
+    padding: 32px;
+}
+
+.purchase-car {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.purchase-image {
+    width: 180px;
+}
+
+.purchase-image svg {
+    width: 100%;
+}
+
+.purchase-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.purchase-summary {
+    margin: 24px 0;
+    padding: 20px;
+    background: #f4f8fc;
+    border-radius: 10px;
+}
+
+.purchase-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}

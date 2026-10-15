@@ -1,7 +1,10 @@
 using backend.DAL;
 using backend.Routes.Buyers;
 using backend.Routes.Cars;
+using backend.Routes.Purchases;
+using backend.Controllers.Buyers;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +28,12 @@ var app = builder.Build();
 app.UseCors("Frontend");
 
 app.MapBuyerRegRoute();
+
 app.MapCarBrowseRoute();
 app.MapCarDetailsRoute();
+
+app.MapBuyerPurchaseRoute();
+app.MapPurchaseHistoryRoute();
 
 
 app.Run();
