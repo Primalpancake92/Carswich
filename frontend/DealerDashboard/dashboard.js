@@ -33,7 +33,7 @@ document.getElementById("dealerListingsGrid").innerHTML = `
 
 // Buttons
 function goToAddCar() {
-    alert("Add Car page coming soon.");
+    window.location.href = "addcar.html";
 }
 
 function goToListings() {
