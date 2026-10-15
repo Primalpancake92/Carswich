@@ -16,24 +16,31 @@ namespace backend.Routes.Dealer
 
                 if (dealer == null)
                 {
-                    return Results.BadRequest(new DealerLoginResponse(
-                        "Dealer not found.",
-                        0
-                    ));
+                    return Results.BadRequest(new
+                    {
+                        message = "Dealer not found.",
+                        dealerId = 0
+                    });
                 }
 
                 if (dealer.Password != req.Password)
                 {
-                    return Results.BadRequest(new DealerLoginResponse(
-                        "Incorrect password.",
-                        0
-                    ));
+                    return Results.BadRequest(new
+                    {
+                        message = "Incorrect password.",
+                        dealerId = 0
+                    });
                 }
 
+                // FIX: Return ALL dealer fields
                 return Results.Ok(new DealerLoginResponse(
                     "Login successful.",
-                    dealer.UserId
+                    dealer.UserId,
+                    dealer.FullName,
+                    dealer.Email,
+                    dealer.DealershipName
                 ));
+
             });
         }
     }

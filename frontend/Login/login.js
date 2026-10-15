@@ -64,8 +64,12 @@ form.addEventListener("submit", async event => {
 
             if (response.ok) {
                 showMessage("Dealer login successful!", false);
-                localStorage.setItem("dealerId", data.userId);
-                window.location.href = "../Dealer/dashboard.html";
+                localStorage.setItem("dealerId", data.dealerId);
+                localStorage.setItem("dealerName", data.dealershipName);
+                localStorage.setItem("dealerFullName", data.fullName);
+                localStorage.setItem("dealerEmail", data.email);
+                window.location.href = "../Dealerdashboard/dashboard.html";;
+                return;
             } else {
                 showMessage(data.message, true);
             }
