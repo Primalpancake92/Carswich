@@ -10,7 +10,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddValidation();
 
-// CORS — REQUIRED for Live Server (port 5500)
+// CORS — REQUIRED for Live Server 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -26,6 +26,10 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+app.UseCors("AllowFrontend");
+
+
 
 app.MapBuyerRegRoute();
 app.MapDealerRegRoute();
