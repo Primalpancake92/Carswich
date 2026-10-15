@@ -1,7 +1,19 @@
+console.log("addcar.js is running");
+
 document.getElementById("addCarForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const msg = document.getElementById("addCarMessage");
+    msg.style.color = "blue";
+    msg.textContent = "Submitting car details...";
+
     const dealerId = localStorage.getItem("dealerId");
+
+    if (!dealerId) {
+        msg.style.color = "red";
+        msg.textContent = "Dealer ID missing. Please log in again.";
+        return;
+    }
 
     const carData = {
         make: document.getElementById("make").value,
@@ -14,22 +26,26 @@ document.getElementById("addCarForm").addEventListener("submit", async (e) => {
         dealerId: parseInt(dealerId)
     };
 
-    const response = await fetch("https://localhost:7074/api/cars/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(carData)
-    });
+    try {
+        const response = await fetch("http://localhost:3000/api/cars/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(carData)
+        });
 
-    const data = await response.json();
-
-    const msg = document.getElementById("addCarMessage");
-
-    if (response.ok) {
-        msg.style.color = "green";
-        msg.textContent = "Car added successfully!";
-    } else {
+        if (response.ok) {
+            msg.style.color = "green";
+            msg.textContent = "Car added successfully!";
+        } else {
+            const data = await response.json();
+            msg.style.color = "red";
+            msg.textContent = data.message || "Failed to add car.";
+        }
+    } catch (error) {
         msg.style.color = "red";
-        msg.textContent = data.message || "Failed to add car.";
+        msg.textContent = "Could not connect to server.";
     }
 });
+
+
 

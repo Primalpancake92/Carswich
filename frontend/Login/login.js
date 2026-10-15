@@ -64,7 +64,7 @@ form.addEventListener("submit", async event => {
 
             if (response.ok) {
                 showMessage("Dealer login successful!", false);
-                localStorage.setItem("dealerId", data.dealerId);
+                localStorage.setItem("dealerId", data.userId);
                 localStorage.setItem("dealerName", data.dealershipName);
                 localStorage.setItem("dealerFullName", data.fullName);
                 localStorage.setItem("dealerEmail", data.email);
