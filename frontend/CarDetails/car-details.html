@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Car details | Carswich</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../Shared/app.css">
+    <link rel="stylesheet" href="car-details.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <a href="../Home/home.html" class="logo">
+            🚗
+        </a>
+
+        <div class="nav-user">
+            <span class="avatar" data-user="initials"></span>
+            <span class="nav-user-name" data-user="fullName"></span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="../Home/home.html" class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="../Browse/browse.html" class="nav-link">
+                Browse cars
+            </a>
+
+            <a href="../Account/account.html" class="nav-link">
+                Account
+            </a>
+        </nav>
+
+        <a href="../index.html"
+           class="btn btn-secondary btn-small nav-logout">
+            Log out
+        </a>
+
+    </header>
+
+
+    <main class="details-layout">
+
+        <a href="../Browse/browse.html" class="back-link">
+            ← Back to Browse
+        </a>
+
+        <section class="card-panel car-details-panel"
+                 id="car-details">
+
+            <p id="loading">
+                Loading car...
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <p class="toast"
+       id="toast"
+       role="status"
+       aria-live="polite">
+    </p>
+
+
+    <footer class="footer">
+        <p>&copy; 2026 Carswich</p>
+    </footer>
+
+
+    <script src="../Shared/app.js"></script>
+    <script src="car-details.js"></script>
+
+</body>
+</html>

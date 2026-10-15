@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Purchase | Carswich</title>
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../Shared/app.css">
+    <link rel="stylesheet" href="purchase.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="../Home/home.html" class="logo">🚗</a>
+
+        <div class="nav-user">
+            <span class="avatar" data-user="initials"></span>
+            <span class="nav-user-name" data-user="fullName"></span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="../Home/home.html" class="nav-link">Dashboard</a>
+            <a href="../Browse/browse.html" class="nav-link">Browse cars</a>
+            <a href="../Account/account.html" class="nav-link">Account</a>
+        </nav>
+
+        <a href="../index.html"
+           class="btn btn-secondary btn-small nav-logout">
+            Log out
+        </a>
+    </header>
+
+
+    <main class="purchase-layout">
+
+        <a href="../Browse/browse.html" class="back-link">
+            ← Back to Browse
+        </a>
+
+        <section class="card-panel purchase-panel"
+                 id="purchase-panel">
+
+            <p>Loading purchase details...</p>
+
+        </section>
+
+    </main>
+
+
+    <p class="toast"
+       id="toast"
+       role="status"
+       aria-live="polite">
+    </p>
+
+    <footer class="footer">
+        <p>&copy; 2026 Carswich</p>
+    </footer>
+
+    <script src="../Shared/app.js"></script>
+    <script src="purchase.js"></script>
+
+</body>
+</html>

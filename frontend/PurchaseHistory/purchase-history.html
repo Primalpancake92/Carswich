@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Purchase History | Carswich</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../Shared/app.css">
+    <link rel="stylesheet" href="purchase-history.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="../Home/home.html" class="logo">🚗</a>
+
+        <div class="nav-user">
+            <span class="avatar" data-user="initials"></span>
+            <span class="nav-user-name" data-user="fullName"></span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="../Home/home.html" class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="../Browse/browse.html" class="nav-link">
+                Browse cars
+            </a>
+
+            <a href="purchase-history.html"
+               class="nav-link"
+               aria-current="page">
+                Purchase history
+            </a>
+
+            <a href="../Account/account.html" class="nav-link">
+                Account
+            </a>
+        </nav>
+
+        <a href="../index.html"
+           class="btn btn-secondary btn-small nav-logout">
+            Log out
+        </a>
+    </header>
+
+
+    <main class="history-layout">
+
+        <div class="page-heading">
+            <div>
+                <h1>Purchase history</h1>
+                <p class="muted">
+                    Cars you have purchased through Carswich.
+                </p>
+            </div>
+
+            <a href="../Browse/browse.html"
+               class="btn btn-primary">
+                Browse cars
+            </a>
+        </div>
+
+
+        <section class="card-panel history-panel">
+
+            <p id="history-count"
+               class="muted">
+            </p>
+
+            <div id="purchase-list">
+                <p>Loading purchase history...</p>
+            </div>
+
+            <p id="no-purchases"
+               class="empty"
+               hidden>
+                You haven't purchased any cars yet.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+        <p>&copy; 2026 Carswich</p>
+    </footer>
+
+    <script src="../Shared/app.js"></script>
+    <script src="purchase-history.js"></script>
+
+</body>
+</html>
