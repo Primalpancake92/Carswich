@@ -1,0 +1,71 @@
+.details-layout {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 24px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.car-details-panel {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 40px;
+    padding: 32px;
+}
+
+.details-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    background: #dbeeff;
+    border-radius: 16px;
+}
+
+.details-image svg {
+    width: 80%;
+    max-width: 350px;
+}
+
+.details-price {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 10px 0 24px;
+}
+
+.details-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.details-specs div {
+    padding: 12px;
+    background: #f4f8fc;
+    border-radius: 8px;
+}
+
+.details-specs dt {
+    font-weight: 600;
+}
+
+.details-specs dd {
+    margin: 4px 0 0;
+}
+
+.error-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+}
+
+@media (max-width: 700px) {
+    .car-details-panel {
+        grid-template-columns: 1fr;
+    }
+}

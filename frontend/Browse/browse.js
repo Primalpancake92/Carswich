@@ -1,5 +1,5 @@
-// Browse cars page.
-// Cars are loaded from the ASP.NET backend.
+// Browse cars page
+// Cars are loaded from the ASP.NET backend
 
 let browseCars = [];
 
@@ -85,6 +85,22 @@ function renderCars() {
 
     el("car-grid").innerHTML =
         results.map(carCard).join("");
+    
+    document.querySelectorAll(".car-card").forEach((card, index) => {
+        const car = results[index];
+
+        card.addEventListener("click", event => {
+
+            if (event.target.closest("button")) {
+                return;
+            }
+
+            window.location.href =
+                `../CarDetails/car-details.html?id=${car.carId}`;
+        });
+
+        card.style.cursor = "pointer";
+    });
 }
 
 
