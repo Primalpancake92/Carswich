@@ -1,4 +1,31 @@
-// Browse cars page. Data and shared helpers come from ../Shared/app.js.
+// Browse cars page.
+// Cars are loaded from the ASP.NET backend.
+
+let browseCars = [];
+
+// Get cars from the backend
+async function loadCars() {
+    try {
+        const response = await fetch("http://localhost:3000/api/cars");
+
+        if (!response.ok) {
+            throw new Error("Could not load cars.");
+        }
+
+        browseCars = await response.json();
+
+        fillMakeFilter();
+        renderPage();
+    } catch (error) {
+        console.error(error);
+
+        el("results-count").textContent = "Could not load cars";
+        el("no-results").hidden = false;
+        el("no-results").textContent =
+            "There was a problem loading cars from the server.";
+    }
+}
+
 
 function filteredCars() {
     const search = el("search").value.trim().toLowerCase();
@@ -6,11 +33,18 @@ function filteredCars() {
     const maxPrice = Number(el("max-price").value) || Infinity;
     const sort = el("sort").value;
 
-    const results = availableCars().filter(car => {
-        if (make && car.make !== make) return false;
-        if (car.price > maxPrice) return false;
+    const results = browseCars.filter(car => {
+        if (make && car.make !== make) {
+            return false;
+        }
 
-        const text = `${car.make} ${car.model} ${car.colour}`.toLowerCase();
+        if (car.price > maxPrice) {
+            return false;
+        }
+
+        const text =
+            `${car.make} ${car.model} ${car.colour}`.toLowerCase();
+
         return text.includes(search);
     });
 
@@ -24,8 +58,12 @@ function filteredCars() {
     return results.sort(sorters[sort]);
 }
 
+
 function fillMakeFilter() {
-    const makes = [...new Set(cars.map(car => car.make))].sort();
+    const makes = [...new Set(
+        browseCars.map(car => car.make)
+    )].sort();
+
     const select = el("make");
 
     makes.forEach(make => {
@@ -36,22 +74,32 @@ function fillMakeFilter() {
     });
 }
 
+
 function renderCars() {
     const results = filteredCars();
 
-    el("results-count").textContent = `${results.length} car${results.length === 1 ? "" : "s"}`;
+    el("results-count").textContent =
+        `${results.length} car${results.length === 1 ? "" : "s"}`;
+
     el("no-results").hidden = results.length > 0;
-    el("car-grid").innerHTML = results.map(carCard).join("");
+
+    el("car-grid").innerHTML =
+        results.map(carCard).join("");
 }
+
 
 function renderPage() {
     renderUser();
     renderCars();
 }
 
-el("filters").addEventListener("input", renderCars);
-el("filters").addEventListener("submit", event => event.preventDefault());
-listenForBuyClicks(renderPage);
 
-fillMakeFilter();
-renderPage();
+el("filters").addEventListener("input", renderCars);
+
+el("filters").addEventListener("submit", event => {
+    event.preventDefault();
+});
+
+
+// Load cars when the page opens
+loadCars();
