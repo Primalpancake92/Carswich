@@ -1,6 +1,7 @@
 using backend.DAL;
 using backend.Routes.Buyers;
 using backend.Routes.Dealer;
+using backend.Routes.addCar;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +35,7 @@ app.UseCors("AllowFrontend");
 app.MapBuyerRegRoute();
 app.MapDealerRegRoute();
 app.MapDealerAuthRoute();
+app.MapAddCarRoute();
 
 
 

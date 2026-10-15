@@ -1,0 +1,21 @@
+.content {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#addCarMessage {
+    margin-top: 20px;
+    font-weight: bold;
+}
