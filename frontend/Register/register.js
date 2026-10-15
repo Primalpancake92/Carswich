@@ -35,7 +35,7 @@ function showMessage(text, isError) {
     message.classList.toggle("error", isError);
 }
 
-form.addEventListener("submit", event => {
+form.addEventListener("submit", async event => {
     event.preventDefault();
 
     const data = {
@@ -77,8 +77,37 @@ form.addEventListener("submit", event => {
         return;
     }
 
+    //Send to backend 
+    const url = isDealer()
+        ? "http://localhost:3000/api/dealers/register"
+        : "http://localhost:3000/api/buyers/register";
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const body = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            showMessage(body.message || "Registration failed.", true);
+            return;
+        }
+
+        showMessage("Registration successful! Redirecting to login…", false);
+
+        setTimeout(() => {
+            window.location.href = "/Login/login.html";
+        }, 900);
+
+    } catch (err) {
+        showMessage("Could not connect to server.", true);
+    }
+
     // TODO: send data to the backend once the register API route exists
-    showMessage("Registration isn't connected to the backend yet.", false);
+    //showMessage("Registration isn't connected to the backend yet.", false);
     
     
 });
