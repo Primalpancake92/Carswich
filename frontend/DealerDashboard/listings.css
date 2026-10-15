@@ -1,0 +1,34 @@
+.content {
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.listing-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.listing-card h3 {
+    margin-bottom: 10px;
+}
+
+.listing-card p {
+    margin: 4px 0;
+}
+
+#listingsMessage {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+

@@ -2,6 +2,8 @@ using backend.DAL;
 using backend.Routes.Buyers;
 using backend.Routes.Dealer;
 using backend.Routes.addCar;
+using backend.Routes.Inventory;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +38,7 @@ app.MapBuyerRegRoute();
 app.MapDealerRegRoute();
 app.MapDealerAuthRoute();
 app.MapAddCarRoute();
+app.MapGetDealerInventoryRoute();
 
 
 
