@@ -30,7 +30,7 @@ function showMessage(text, isError) {
     message.classList.toggle("error", isError);
 }
 
-form.addEventListener("submit", event => {
+form.addEventListener("submit", async event => {
     event.preventDefault();
 
     const accountType = form.accountType.value;   // "buyer" or "dealer"
@@ -47,6 +47,25 @@ form.addEventListener("submit", event => {
         return;
     }
 
-    // TODO: send { accountType, email, password } to the backend once the login API route exists
-    showMessage(`${accountType === "dealer" ? "Dealer" : "Buyer"} login isn't connected to the backend yet.`, false);
+    // TODO: call the dealer login route once it exists
+    if (accountType === "dealer") {
+        showMessage("Dealer login isn't available yet.", true);
+        return;
+    }
+
+    // POST /api/buyers/login (backend/Routes/Buyer/BuyerAuthRoute.cs)
+    loginButton.disabled = true;
+    showMessage("Logging in…", false);
+
+    const result = await postJson("/api/buyers/login", { email, password });
+
+    if (!result.ok) {
+        showMessage(errorMessage(result), true);
+        loginButton.disabled = false;
+        return;
+    }
+
+    saveUser(result.data, form.remember.checked);
+    showMessage(`Welcome back, ${result.data.fullName}!`, false);
+    location.href = "../Home/home.html";
 });

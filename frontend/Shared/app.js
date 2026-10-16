@@ -1,5 +1,5 @@
 // Shared by every logged-in page (Home, Browse, Account).
-// Load this before the page's own script.
+// Load after ../Shared/api.js and before the page's own script.
 
 // TODO: replace this sample data with fetch() calls once the backend routes exist,
 // e.g. GET /api/me, GET /api/cars, GET /api/dealers, GET /api/purchases.
@@ -64,6 +64,22 @@ function saveData() {
 
 const data = loadData();
 const { buyers, dealers, cars, purchases } = data;
+
+// The user saved by the Login / Register pages (loadUser in api.js) replaces the sample
+// user the first time a page opens after logging in. After that the saved sample data
+// keeps their changes (deposits, edits) until they log out.
+const loggedInUser = loadUser();
+if (loggedInUser && data.loggedInUserId !== loggedInUser.userId) {
+    const users = loggedInUser.userType === "Dealer" ? dealers : buyers;
+    const index = users.findIndex(user => user.userId === loggedInUser.userId);
+
+    if (index >= 0) users[index] = loggedInUser;
+    else users.push(loggedInUser);
+
+    data.currentUserId = loggedInUser.userId;
+    data.loggedInUserId = loggedInUser.userId;
+    saveData();
+}
 
 // Sample login: add ?as=dealer or ?as=buyer to any page's URL to switch who is logged in.
 // The choice is saved, so it stays when moving between pages.
@@ -196,6 +212,16 @@ function renderBackground() {
 }
 
 renderBackground();
+
+// Log out: forget the saved user and the sample data changes, then follow the link
+document.querySelector(".nav-logout")?.addEventListener("click", () => {
+    clearUser();
+    try {
+        sessionStorage.removeItem(storageKey);
+    } catch {
+        // Storage blocked: nothing was saved
+    }
+});
 
 // ---------- Rendering used on several pages ----------
 

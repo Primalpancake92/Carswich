@@ -35,7 +35,9 @@ function showMessage(text, isError) {
     message.classList.toggle("error", isError);
 }
 
-form.addEventListener("submit", event => {
+const submitButton = form.querySelector("button[type='submit']");
+
+form.addEventListener("submit", async event => {
     event.preventDefault();
 
     const data = {
@@ -77,6 +79,33 @@ form.addEventListener("submit", event => {
         return;
     }
 
-    // TODO: send data to the backend once the register API route exists
-    showMessage("Registration isn't connected to the backend yet.", false);
+    // TODO: call the dealer register route once it exists
+    if (isDealer()) {
+        showMessage("Dealer registration isn't available yet.", true);
+        return;
+    }
+
+    // POST /api/buyers/register (backend/Routes/Buyer/BuyerRegRoute.cs).
+    // Sends the fields of BuyerRegisterRequest; accountType and confirmPassword stay here.
+    submitButton.disabled = true;
+    showMessage("Creating your account…", false);
+
+    const result = await postJson("/api/buyers/register", {
+        fullName: data.fullName,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
+        address: data.address,
+        password: data.password,
+    });
+
+    if (!result.ok) {
+        showMessage(errorMessage(result), true);
+        submitButton.disabled = false;
+        return;
+    }
+
+    // The new account is logged in straight away
+    saveUser(result.data, false);
+    showMessage("Account created!", false);
+    location.href = "../Home/home.html";
 });
