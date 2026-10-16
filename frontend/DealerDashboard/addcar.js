@@ -47,5 +47,9 @@ document.getElementById("addCarForm").addEventListener("submit", async (e) => {
     }
 });
 
+function goBackToDashboard() {
+    window.location.href = "dashboard.html";
+}
+
 
 

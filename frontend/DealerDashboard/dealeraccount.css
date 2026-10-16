@@ -1,0 +1,41 @@
+.content {
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+.account-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.account-details {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.account-details div {
+    margin-bottom: 12px;
+}
+
+.account-details dt {
+    font-weight: bold;
+    color: #333;
+}
+
+.account-details dd {
+    margin-left: 0;
+    color: #555;
+}
+
+.badge {
+    background: #2b7bd6;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 15px;
+}

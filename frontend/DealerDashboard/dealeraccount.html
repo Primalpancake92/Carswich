@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dealer Account | Carswich</title>
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../Shared/app.css">
+    <link rel="stylesheet" href="dealeraccount.css">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="dashboard.html" class="logo">Carswich</a>
+
+    <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="dealeraccount.html" class="nav-link" aria-current="page">Account</a>
+    </nav>
+
+    <a href="../index.html" class="btn btn-secondary btn-small nav-logout">Log out</a>
+</header>
+
+<main class="content">
+    <h1>Dealer Account</h1>
+    <p class="tagline">Manage your dealership information.</p>
+
+    <div class="account-card">
+        <span class="avatar avatar-large" data-user="initials"></span>
+
+        <h2 id="dealerFullName"></h2>
+        <p class="badge">Dealer</p>
+
+        <dl class="account-details">
+            <div>
+                <dt>Dealership</dt>
+                <dd id="dealershipName"></dd>
+            </div>
+            <div>
+                <dt>Email</dt>
+                <dd id="dealerEmail"></dd>
+            </div>
+            <div>
+                <dt>Dealer ID</dt>
+                <dd id="dealerId"></dd>
+            </div>
+        </dl>
+
+        <button class="btn btn-primary" onclick="goBack()">Back to Dashboard</button>
+    </div>
+</main>
+
+<script src="dealeraccount.js"></script>
+</body>
+</html>

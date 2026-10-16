@@ -84,7 +84,7 @@ function goToListings() {
 }
 
 function goToAccount() {
-    window.location.href = "../Account/account.html";
+    window.location.href = "dealeraccount.html";
 }
 
 

@@ -58,3 +58,8 @@ async function loadListings() {
         msg.textContent = "Could not connect to server.";
     }
 }
+
+function goBackToDashboard() {
+    window.location.href = "dashboard.html";
+}
+
