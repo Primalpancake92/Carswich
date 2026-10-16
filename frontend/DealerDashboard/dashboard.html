@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dealer Dashboard | Carswich</title>
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../Shared/app.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="dashboard.html" class="logo" aria-label="Carswich dashboard">
+            <svg class="logo-icon" viewBox="0 0 64 40" aria-hidden="true">
+                <path d="M6 28 L10 17 Q12 12 18 12 L40 12 Q45 12 49 17 L54 22 Q60 23 60 28 L60 30 L6 30 Z" fill="#2b7bd6"/>
+                <path d="M16 17 Q17 15 20 15 L29 15 L29 22 L13 22 Z M32 15 L39 15 Q43 15 46 19 L48 22 L32 22 Z" fill="#dbeeff"/>
+                <circle cx="18" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="18" cy="30" r="2.5" fill="#ffffff"/>
+                <circle cx="48" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="48" cy="30" r="2.5" fill="#ffffff"/>
+                <path d="M2 36 Q32 42 62 36" stroke="#7cc4fa" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </a>
+
+        <div class="nav-user">
+            <span class="avatar" data-user="initials"></span>
+            <span class="nav-user-name" id="dealerNameNav"></span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="dashboard.html" class="nav-link" aria-current="page">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+                Dealer Dashboard
+            </a>
+
+            <a href="dealeraccount.html" class="nav-link">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21 Q4 14 12 14 Q20 14 20 21"/></svg>
+                Account
+            </a>
+        </nav>
+
+        <a href="../index.html" class="btn btn-secondary btn-small nav-logout">Log out</a>
+    </header>
+
+
+    <!-- MAIN LAYOUT -->
+    <div class="layout with-side">
+
+        <!-- LEFT SIDE -->
+        <main class="content">
+            <div class="welcome">
+                <div>
+                    <h1>Welcome back, <span id="dealerFirstName"></span></h1>
+                    <p class="tagline">Manage your dealership and listings.</p>
+                </div>
+                <button class="btn btn-primary" onclick="goToAddCar()">Add New Car</button>
+            </div>
+
+            <div class="stats">
+                <article class="stat-card">
+                    <p class="stat-label">Your Listings</p>
+                    <p class="stat-value" id="dealerListingsCount">0</p>
+                    <p class="stat-note">Cars you currently have for sale</p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="stat-label">Cars Sold</p>
+                    <p class="stat-value" id="dealerSoldCount">0</p>
+                    <p class="stat-note">Total cars sold</p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="stat-label">Revenue</p>
+                    <p class="stat-value" id="dealerRevenue">$0</p>
+                    <p class="stat-note">Total earnings</p>
+                </article>
+            </div>
+
+            <div class="card-panel">
+                <div class="panel-header">
+                    <h2>Your Latest Listings</h2>
+                    <button class="text-link" onclick="goToListings()">View all</button>
+                </div>
+                <div class="car-grid" id="dealerListingsGrid"></div>
+            </div>
+        </main>
+
+
+        <!-- RIGHT SIDE -->
+        <aside class="account-side">
+            <div class="card-panel profile">
+                <span class="avatar avatar-large" data-user="initials"></span>
+                <h2 id="dealerFullName"></h2>
+                <p class="badge">Dealer</p>
+
+                <dl class="profile-details">
+                    <div>
+                        <dt>Dealership</dt>
+                        <dd id="dealershipName"></dd>
+                    </div>
+                    <div>
+                        <dt>Email</dt>
+                        <dd id="dealerEmail"></dd>
+                    </div>
+                    <div>
+                        <dt>Dealer ID</dt>
+                        <dd id="dealerId"></dd>
+                    </div>
+                </dl>
+
+                <button class="btn btn-secondary btn-small" onclick="goToAccount()">Edit Account</button>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- SCRIPT AT BOTTOM (IMPORTANT) -->
+    <script src="dashboard.js"></script>
+</body>
+</html>
