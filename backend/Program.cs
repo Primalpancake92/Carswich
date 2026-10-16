@@ -3,6 +3,11 @@ using backend.Routes.Buyers;
 using backend.Routes.Cars;
 using backend.Routes.Purchases;
 using backend.Controllers.Buyers;
+
+using backend.Routes.Dealer;
+using backend.Routes.addCar;
+using backend.Routes.Inventory;
+
 using Microsoft.EntityFrameworkCore;
 
 
@@ -13,21 +18,34 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddValidation();
 
+// CORS — REQUIRED for Live Server 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Frontend", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5500")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins(
+            "http://localhost:5500",
+            "http://127.0.0.1:5500"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
 
+
 var app = builder.Build();
 
-app.UseCors("Frontend");
+app.UseCors("AllowFrontend");
+
+
 
 app.MapBuyerRegRoute();
+app.MapDealerRegRoute();
+app.MapDealerAuthRoute();
+app.MapAddCarRoute();
+app.MapGetDealerInventoryRoute();
+
+
 
 app.MapCarBrowseRoute();
 app.MapCarDetailsRoute();
