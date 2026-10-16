@@ -13,5 +13,12 @@ namespace backend.utils
 
             return result;
         }
+
+        // Emails are stored trimmed and lowercase, so "Alex@Example.com " and
+        // "alex@example.com" count as the same account
+        public static string NormaliseEmail(string email)
+        {
+            return email.Trim().ToLower();
+        }
     }
 }

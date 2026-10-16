@@ -22,14 +22,13 @@ namespace backend.Controllers.Buyers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<BuyerRegisterErrResponse>> Register(BuyerRegisterRequest req)
+        public async Task<ActionResult<BuyerResponse>> Register(BuyerRegisterRequest req)
         {
             var email = req.Email.ToLower().Trim();
 
             if (await _db.Users.AnyAsync(user => user.Email == email))
             {
-                return Conflict(new BuyerRegisterErrResponse(
-                    "Error",
+                return Conflict(new BuyerErrorResponse(
                     $"User with {email} has been previously registered"
                 ));
             }
@@ -49,18 +48,7 @@ namespace backend.Controllers.Buyers
             await _db.SaveChangesAsync();
 
             return StatusCode(StatusCodes.Status201Created,
-                new BuyerRegisterSuccessResponse(
-                    "Success",
-                    new Dictionary<string, string>
-                    {
-                        ["userId"] = buyer.UserId.ToString(),
-                        ["phoneNumber"] = buyer.PhoneNumber,
-                        ["email"] = buyer.Email,
-                        ["address"] = buyer.PhoneNumber
-                    },
-                    "Buyer has been created successfully."
-                )
-            );
+                BuyerResponse.FromBuyer("Buyer has been created successfully.", buyer));
         }
     }
 }
