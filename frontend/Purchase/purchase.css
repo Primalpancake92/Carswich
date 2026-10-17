@@ -1,48 +1,306 @@
+/* Purchase page only. Navbar, layout, panels and the car tags (.car-specs)
+   are in ../Shared/app.css. */
+
 .purchase-layout {
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 0 24px;
+    max-width: 960px;
 }
 
+/* Same colour as .text-link in ../Shared/app.css */
 .back-link {
-    display: inline-block;
-    margin-bottom: 20px;
+    justify-self: start;
+    color: var(--blue-500);
+    font-weight: 600;
     text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
 }
 
 .purchase-panel {
     padding: 32px;
 }
 
-.purchase-car {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    margin-bottom: 30px;
+/* Car on the left, order summary on the right */
+.purchase-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
 }
 
 .purchase-image {
-    width: 180px;
+    display: grid;
+    place-items: center;
+    height: 200px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, var(--blue-100) 0%, var(--blue-50) 100%);
 }
 
 .purchase-image svg {
-    width: 100%;
+    width: 220px;
+    height: 138px;
 }
 
-.purchase-price {
-    font-size: 1.8rem;
+.purchase-car h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.purchase-car .car-description {
+    margin: 0;
+}
+
+/* Order summary: same box as the Account page wallet balance */
+.order-summary {
+    padding: 24px;
+    border-radius: 12px;
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+}
+
+.order-summary h2 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+}
+
+.order-summary dl {
+    margin: 0 0 12px;
+}
+
+.order-summary dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--blue-100);
+}
+
+.order-summary dl div:first-child {
+    border-top: none;
+}
+
+.order-summary dt {
+    color: var(--blue-600);
+}
+
+.order-summary dd {
+    margin: 0;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.order-total {
+    font-size: 1.1rem;
+}
+
+.order-total dt {
+    color: var(--blue-900);
     font-weight: 700;
 }
 
-.purchase-summary {
-    margin: 24px 0;
-    padding: 20px;
-    background: #f4f8fc;
-    border-radius: 10px;
+.order-total dd {
+    font-weight: 700;
+}
+
+/* Not enough money: the balance after goes red, like .form-message.error */
+.order-total.short dd {
+    color: #c5221f;
 }
 
 .purchase-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
-    margin-top: 24px;
+}
+
+.purchase-actions .btn {
+    text-align: center;
+    cursor: pointer;
+}
+
+/* In the order summary the buttons stack, full width, so the price fits on one line */
+.order-summary .purchase-actions {
+    flex-direction: column;
+}
+
+.order-summary .purchase-actions .btn {
+    width: 100%;
+}
+
+.purchase-actions .btn:disabled {
+    background: var(--blue-100);
+    border-color: var(--blue-100);
+    color: var(--blue-600);
+    cursor: not-allowed;
+}
+
+/* Success, error and log-in messages: centred in the panel */
+.purchase-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 0;
+    text-align: center;
+}
+
+.purchase-result h1 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.purchase-result .muted {
+    max-width: 440px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.purchase-result .purchase-actions {
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.result-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--blue-500);
+}
+
+.result-icon svg {
+    width: 34px;
+    height: 34px;
+    fill: none;
+    stroke: var(--white);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+@media (max-width: 760px) {
+    .purchase-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .purchase-panel {
+        padding: 24px;
+    }
+}
+
+/* Confirmation modal after buying (a <dialog>, opened with showModal()) */
+.purchase-modal {
+    width: min(420px, calc(100% - 32px));
+    padding: 32px 28px 28px;
+    border: none;
+    border-radius: 16px;
+    background: var(--white);
+    color: var(--blue-900);
+    text-align: center;
+    box-shadow: 0 24px 48px rgba(13, 59, 102, 0.3);
+}
+
+.purchase-modal[open] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: modal-in 0.2s ease-out;
+}
+
+.purchase-modal::backdrop {
+    background: rgba(13, 59, 102, 0.45);
+}
+
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+}
+
+.purchase-modal h2 {
+    margin: 4px 0 0;
+    font-size: 1.5rem;
+}
+
+.modal-car {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.modal-car svg {
+    width: 110px;
+    height: 69px;
+}
+
+.modal-details {
+    width: 100%;
+    margin: 4px 0 8px;
+    text-align: left;
+}
+
+.modal-details div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--blue-100);
+}
+
+.modal-details dt {
+    color: var(--blue-600);
+}
+
+.modal-details dd {
+    margin: 0;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.purchase-modal .purchase-actions {
+    flex-direction: column;
+    width: 100%;
+}
+
+.purchase-modal .purchase-actions .btn {
+    width: 100%;
+}
+
+.modal-redirect {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--blue-600);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: none;
+    color: var(--blue-600);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: var(--blue-50);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .purchase-modal[open] {
+        animation: none;
+    }
 }

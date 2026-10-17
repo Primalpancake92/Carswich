@@ -68,7 +68,7 @@ form.addEventListener("submit", async event => {
                 localStorage.setItem("dealerName", data.dealershipName);
                 localStorage.setItem("dealerFullName", data.fullName);
                 localStorage.setItem("dealerEmail", data.email);
-                window.location.href = "../Dealerdashboard/dashboard.html";;
+                window.location.href = "../DealerDashboard/dashboard.html";
                 return;
             } else {
                 showMessage(data.message, true);
@@ -79,6 +79,37 @@ form.addEventListener("submit", async event => {
         }
     }
 
-    // TODO: send { accountType, email, password } to the backend once the login API route exists
-    //showMessage(`${accountType === "dealer" ? "Dealer" : "Buyer"} login isn't connected to the backend yet.`, false);
+    // ---------------------------------------
+    // BUYER LOGIN
+    // ---------------------------------------
+    else {
+        try {
+            const response = await fetch("http://localhost:3000/api/buyers/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showMessage("Buyer login successful!", false);
+                localStorage.setItem("buyerId", data.userId);
+                localStorage.setItem("buyerFullName", data.fullName);
+                localStorage.setItem("buyerEmail", data.email);
+                localStorage.setItem("buyerPhone", data.phoneNumber);
+                localStorage.setItem("buyerAddress", data.address);
+                localStorage.setItem("buyerBalance", data.balance);
+                window.location.href = "../Browse/browse.html";
+                return;
+            } else {
+                showMessage(data.message, true);
+            }
+        } catch (err) {
+            showMessage("Could not connect to server.", true);
+            return;
+        }
+    }
 });

@@ -3,16 +3,22 @@
 
 let browseCars = [];
 
+// Dealership name for each dealerId (loadDealershipNames() in ../Shared/app.js)
+let dealershipNames = {};
+
 // Get cars from the backend
 async function loadCars() {
     try {
-        const response = await fetch("http://localhost:3000/api/cars");
+        const response = await fetch(`${API}/cars`);
 
         if (!response.ok) {
             throw new Error("Could not load cars.");
         }
 
         browseCars = await response.json();
+
+        // Names for the cards, and the balance that decides which Buy buttons are greyed out
+        [dealershipNames] = await Promise.all([loadDealershipNames(), userReady]);
 
         fillMakeFilter();
         renderPage();
@@ -83,15 +89,17 @@ function renderCars() {
 
     el("no-results").hidden = results.length > 0;
 
-    el("car-grid").innerHTML =
-        results.map(carCard).join("");
+    el("car-grid").innerHTML = results
+        .map(car => carCard(car, dealershipNames[car.dealerId] || "Private seller"))
+        .join("");
     
     document.querySelectorAll(".car-card").forEach((card, index) => {
         const car = results[index];
 
         card.addEventListener("click", event => {
 
-            if (event.target.closest("button")) {
+            // The Buy link goes to the Purchase page instead (a greyed-out Buy does nothing)
+            if (event.target.closest("a, button")) {
                 return;
             }
 

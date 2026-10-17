@@ -14,13 +14,17 @@ async function loadCarDetails() {
     try {
 
         const response =
-            await fetch(`http://localhost:3000/api/cars/${carId}`);
+            await fetch(`${API}/cars/${carId}`);
 
         if (!response.ok) {
             throw new Error("Car could not be found.");
         }
 
         const car = await response.json();
+
+        // Dealership name, and the balance that decides whether Buy is greyed out
+        const [dealershipNames] = await Promise.all([loadDealershipNames(), userReady]);
+        car.dealershipName = dealershipNames[car.dealerId] || "Private seller";
 
         renderCar(car);
 
@@ -51,6 +55,10 @@ function renderCar(car) {
                 ${escapeHtml(car.make)}
                 ${escapeHtml(car.model)}
             </h1>
+
+            <p class="car-dealer">
+                ${escapeHtml(car.dealershipName)}
+            </p>
 
             <p class="details-price">
                 ${money.format(car.price)}
@@ -96,21 +104,15 @@ function renderCar(car) {
                 ${escapeHtml(car.description)}
             </p>
 
-            <button
-                type="button"
-                class="btn btn-primary"
-                id="buy-button"
-                data-car-id="${car.carId}">
-                Buy this car
-            </button>
+            ${buyButton(car, `Buy for ${money.format(car.price)}`)}
+
+            ${currentUser.balance < car.price
+                ? `<p class="form-message error">You need ${money.format(car.price - currentUser.balance)} more.
+                       <a href="../Account/account.html?car=${car.carId}#wallet" class="text-link">Add funds</a></p>`
+                : ""}
 
         </div>
     `;
-
-    el("buy-button").addEventListener("click", () => {
-    window.location.href =
-        `../Purchase/purchase.html?id=${car.carId}`;
-    });
 }
 
 
@@ -119,7 +121,7 @@ function showError(message) {
     el("car-details").innerHTML = `
         <div class="error-message">
             <h2>Car unavailable</h2>
-            <p>${escapeHtml(message)}</p>
+            <p class="muted">${escapeHtml(message)}</p>
 
             <a href="../Browse/browse.html"
                class="btn btn-primary">

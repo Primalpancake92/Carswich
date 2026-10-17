@@ -2,56 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Car | Carswich Dealer</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add car | Carswich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../Shared/app.css">
     <link rel="stylesheet" href="addcar.css">
 </head>
 <body>
+    <header class="navbar">
+        <!-- Left: logo icon, then profile pic and name after a divider -->
+        <a href="dashboard.html" class="logo" aria-label="Carswich dealer dashboard">
+            <svg class="logo-icon" viewBox="0 0 64 40" aria-hidden="true">
+                <path d="M6 28 L10 17 Q12 12 18 12 L40 12 Q45 12 49 17 L54 22 Q60 23 60 28 L60 30 L6 30 Z" fill="#2b7bd6"/>
+                <path d="M16 17 Q17 15 20 15 L29 15 L29 22 L13 22 Z M32 15 L39 15 Q43 15 46 19 L48 22 L32 22 Z" fill="#dbeeff"/>
+                <circle cx="18" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="18" cy="30" r="2.5" fill="#ffffff"/>
+                <circle cx="48" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="48" cy="30" r="2.5" fill="#ffffff"/>
+                <path d="M2 36 Q32 42 62 36" stroke="#7cc4fa" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </a>
 
-<header class="navbar">
-    <a href="dashboard.html" class="logo">Carswich</a>
-    <nav class="nav-links">
-        <a href="dashboard.html" class="nav-link">Dashboard</a>
-        <a href="dealeraccount.html" class="nav-link">Account</a>
-    </nav>
-</header>
+        <div class="nav-user">
+            <span class="avatar" data-dealer="initials" aria-hidden="true"></span>
+            <span class="nav-user-name" data-dealer="fullName"></span>
+        </div>
 
-<main class="content">
-    <h1>Add a New Car</h1>
-    <p class="tagline">Fill in the details below to list a new car.</p>
+        <!-- Right: page links. The current page is marked with aria-current="page" -->
+        <nav class="nav-links" aria-label="Dealer menu">
+            <a href="dashboard.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+                Dashboard
+            </a>
+            <a href="listings.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 H20 M9 12 H20 M9 18 H20"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg>
+                Your listings
+            </a>
+            <a href="addcar.html" class="nav-link" aria-current="page">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8 V16 M8 12 H16"/></svg>
+                Add car
+            </a>
+            <a href="dealeraccount.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21 Q4 14 12 14 Q20 14 20 21"/></svg>
+                Account
+            </a>
+        </nav>
 
-    <form id="addCarForm">
+        <!-- Far right: log out -->
+        <a href="../index.html" class="btn btn-secondary btn-small nav-logout">Log out</a>
+    </header>
 
-        <label>Make</label>
-        <input type="text" id="make" required>
+    <div class="layout">
+        <main class="content">
+            <section class="card-panel">
+                <div class="panel-header">
+                    <h1>Add a new car</h1>
+                </div>
+                <p class="muted">Fill in the details below to list a new car.</p>
 
-        <label>Model</label>
-        <input type="text" id="model" required>
+                <form id="addCarForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="make">Make</label>
+                            <input type="text" id="make" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Model</label>
+                            <input type="text" id="model" required>
+                        </div>
+                    </div>
 
-        <label>Year</label>
-        <input type="number" id="year" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <input type="number" id="year" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mileage">Mileage (km)</label>
+                            <input type="number" id="mileage" required>
+                        </div>
+                    </div>
 
-        <label>Mileage</label>
-        <input type="number" id="mileage" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="colour">Colour</label>
+                            <input type="text" id="colour" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price ($)</label>
+                            <input type="number" id="price" required>
+                        </div>
+                    </div>
 
-        <label>Colour</label>
-        <input type="text" id="colour" required>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" rows="4" required></textarea>
+                    </div>
 
-        <label>Price ($)</label>
-        <input type="number" id="price" required>
+                    <p id="addCarMessage" class="form-message"></p>
 
-        <label>Description</label>
-        <textarea id="description" required></textarea>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="goBackToDashboard()">Back to dashboard</button>
+                        <button type="submit" class="btn btn-primary">Add car</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Add Car</button>
-    </form>
+    <footer class="footer">
+        <p>&copy; 2026 Carswich</p>
+    </footer>
 
-    <p id="addCarMessage"></p>
-</main>
-<button class="btn btn-secondary" onclick="goBackToDashboard()">Back to Dashboard</button>
-
-<script src="addcar.js"></script>
+    <script src="../Shared/background.js"></script>
+    <script src="dealer-nav.js"></script>
+    <script src="addcar.js"></script>
 </body>
 </html>

@@ -351,11 +351,31 @@ form .btn {
     cursor: pointer;
 }
 
-.car-footer .btn:disabled {
+/* Buy buttons when the balance is below the price (buyButton() in app.js):
+   greyed out and not clickable, on the car cards and the Car details page */
+.btn-primary:disabled,
+.btn-primary:disabled:hover {
     background: var(--blue-100);
     border-color: var(--blue-100);
     color: var(--blue-600);
     cursor: not-allowed;
+    transform: none;
+}
+
+/* Dealer car cards: For sale / Sold out label where the Buy button would be */
+.car-status {
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--blue-500);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.car-status.sold {
+    background: var(--blue-100);
+    color: var(--blue-600);
 }
 
 /* Footer: always pinned to the bottom of the screen.

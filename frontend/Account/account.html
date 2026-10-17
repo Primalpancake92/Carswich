@@ -109,11 +109,11 @@
                 </form>
             </section>
 
-            <!-- Purchase history (buyers) or Sales history (dealers): account.js swaps the labels -->
+            <!-- Purchase history: GET /api/buyers/{buyerId}/purchases (dealers have their own Account page) -->
             <section class="card-panel" data-tab="purchases" hidden>
                 <div class="panel-header">
                     <h1 id="history-title">Purchase history</h1>
-                    <p class="muted" id="history-total" data-stat="spent"></p>
+                    <p class="muted" id="history-total"></p>
                 </div>
 
                 <div class="table-wrap">
@@ -141,7 +141,7 @@
 
                 <div class="wallet-balance">
                     <p class="stat-label">Current balance</p>
-                    <p class="wallet-amount" data-stat="balance"></p>
+                    <p class="wallet-amount" id="wallet-balance"></p>
                 </div>
 
                 <form class="wallet-form" id="deposit-form" novalidate>
@@ -165,6 +165,8 @@
         <p>&copy; 2026 Carswich</p>
     </footer>
 
+    <script src="../Shared/background.js"></script>
+    <script src="../Shared/car-picture.js"></script>
     <script src="../Shared/app.js"></script>
     <script src="account.js"></script>
 </body>

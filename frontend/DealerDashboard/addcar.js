@@ -4,13 +4,13 @@ document.getElementById("addCarForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const msg = document.getElementById("addCarMessage");
-    msg.style.color = "blue";
+    msg.classList.remove("error");
     msg.textContent = "Submitting car details...";
 
     const dealerId = localStorage.getItem("dealerId");
 
     if (!dealerId) {
-        msg.style.color = "red";
+        msg.classList.add("error");
         msg.textContent = "Dealer ID missing. Please log in again.";
         return;
     }
@@ -34,15 +34,15 @@ document.getElementById("addCarForm").addEventListener("submit", async (e) => {
         });
 
         if (response.ok) {
-            msg.style.color = "green";
+            msg.classList.remove("error");
             msg.textContent = "Car added successfully!";
         } else {
             const data = await response.json();
-            msg.style.color = "red";
+            msg.classList.add("error");
             msg.textContent = data.message || "Failed to add car.";
         }
     } catch (error) {
-        msg.style.color = "red";
+        msg.classList.add("error");
         msg.textContent = "Could not connect to server.";
     }
 });

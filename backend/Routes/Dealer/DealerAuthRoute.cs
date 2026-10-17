@@ -11,8 +11,11 @@ namespace backend.Routes.Dealer
         {
             app.MapPost("/api/dealers/login", async (DealerLoginRequest req, AppDbContext db) =>
             {
+                // Dealer registration saves the email as typed, so compare both sides in lower case
+                var email = req.Email.Trim().ToLower();
+
                 var dealer = await db.Dealers
-                    .FirstOrDefaultAsync(d => d.Email == req.Email);
+                    .FirstOrDefaultAsync(d => d.Email.ToLower() == email);
 
                 if (dealer == null)
                 {
