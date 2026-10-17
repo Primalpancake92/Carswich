@@ -50,7 +50,13 @@ namespace backend.DAL
                     .WithOne()
                     .HasForeignKey(c => c.DealerId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                // Worked out from Sales in C#, not stored in the database
+                dealer.Ignore(d => d.Buyers);
             });
+
+            // Worked out from Purchases in C#, not stored in the database
+            modelBuilder.Entity<Buyer>().Ignore(b => b.Dealers);
 
             modelBuilder.Entity<Car>(car =>
             {
@@ -73,18 +79,20 @@ namespace backend.DAL
                 purchase.Property(pur => pur.PaidAmount).IsRequired().HasConversion<double>();
                 purchase.Property(pur => pur.PurchaseDate).IsRequired();
 
-                purchase.HasOne<Car>()
+                purchase.HasOne(pur => pur.Car)
                     .WithMany()
                     .HasForeignKey(pur => pur.CarId)
                     .OnDelete(DeleteBehavior.Restrict);
 
-                purchase.HasOne<Buyer>()
-                    .WithMany()
+                // One buyer has many purchases, each purchase has one buyer
+                purchase.HasOne(pur => pur.Buyer)
+                    .WithMany(buyer => buyer.Purchases)
                     .HasForeignKey(pur => pur.BuyerId)
                     .OnDelete(DeleteBehavior.Restrict);
 
-                purchase.HasOne<Dealer>()
-                    .WithMany()
+                // One dealer has many sales, each purchase has one dealer
+                purchase.HasOne(pur => pur.Dealer)
+                    .WithMany(dealer => dealer.Sales)
                     .HasForeignKey(pur => pur.DealerId)
                     .OnDelete(DeleteBehavior.Restrict);
             });

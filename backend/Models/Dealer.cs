@@ -10,6 +10,15 @@ namespace backend.Models
 
         // Note to self: This contains the list of cars the dealer can list.
         public List<Car> CarsAvailable { get; set; } = new List<Car>();
+
+        // Every sale this dealer has made (the other side is Purchase.Dealer)
+        public List<Purchase> Sales { get; set; } = new List<Purchase>();
+
+        // The buyers who have bought from this dealer, each listed once
+        public IEnumerable<Buyer> Buyers => Sales
+            .Select(sale => sale.Buyer)
+            .DistinctBy(buyer => buyer.UserId);
+
         public Dealer() : base() {}
 
         public Dealer(

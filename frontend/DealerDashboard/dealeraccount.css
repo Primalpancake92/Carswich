@@ -1,0 +1,211 @@
+/* Dealer account page only. Tabs, form and tables come from ../Account/account.css,
+   so this page looks the same as the buyer Account page. This file adds the Revenue tab. */
+
+/* Address takes the whole row (five fields instead of the buyer's four) */
+.account-form .full-width {
+    grid-column: 1 / -1;
+}
+
+/* The chart tooltip is positioned inside the open tab's card */
+.tab-panels > .card-panel {
+    position: relative;
+}
+
+.panel-header {
+    flex-wrap: wrap;
+}
+
+/* Day / Week / Month / Year: one joined row of buttons, the chosen one filled in */
+.period-switch {
+    display: flex;
+    border: 1px solid var(--blue-200);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.period-switch button {
+    padding: 7px 16px;
+    border: none;
+    background: var(--white);
+    color: var(--blue-600);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.period-switch button + button {
+    border-left: 1px solid var(--blue-200);
+}
+
+.period-switch button:hover {
+    background: var(--blue-50);
+}
+
+.period-switch button[aria-pressed="true"] {
+    background: var(--blue-500);
+    color: var(--white);
+}
+
+/* Summary tiles: same look as the buyer Wallet balance box */
+.revenue-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.revenue-stat {
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+}
+
+.revenue-amount {
+    margin: 4px 0 2px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.chart-title {
+    margin: 0 0 12px;
+    font-size: 1rem;
+}
+
+/* Bar chart. Left 52px holds the $ labels, bottom 28px holds the date labels. */
+.revenue-chart {
+    position: relative;
+    height: 260px;
+    margin-bottom: 20px;
+}
+
+.chart-grid {
+    position: absolute;
+    inset: 0 0 28px 52px;
+}
+
+.chart-gridline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 1px solid var(--blue-100);
+}
+
+.chart-gridline span {
+    position: absolute;
+    right: calc(100% + 8px);
+    transform: translateY(-50%);
+    color: var(--blue-600);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.chart-columns {
+    position: absolute;
+    inset: 0 0 0 52px;
+    display: flex;
+    gap: 2px;
+}
+
+/* Each column is a button, so the whole column height is the hover / focus target */
+.chart-column {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+.chart-plot {
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    justify-content: center;
+    border-radius: 6px 6px 0 0;
+    transition: background 0.2s;
+}
+
+.chart-column:hover .chart-plot,
+.chart-column:focus-visible .chart-plot {
+    background: rgba(219, 238, 255, 0.6);
+}
+
+.chart-column:focus-visible {
+    outline: 2px solid var(--blue-500);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+.chart-bar {
+    width: min(60%, 36px);
+    border-radius: 4px 4px 0 0;
+    background: var(--blue-500);
+    transition: height 0.3s;
+}
+
+.chart-column:hover .chart-bar {
+    background: var(--blue-600);
+}
+
+.chart-label {
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    color: var(--blue-600);
+    font-size: 0.75rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.chart-tooltip {
+    position: absolute;
+    z-index: 2;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--blue-900);
+    color: var(--white);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(13, 59, 102, 0.2);
+}
+
+.chart-tooltip strong {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+/* Same numbers as a table, folded away by default */
+.revenue-table summary {
+    color: var(--blue-500);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.revenue-table .table-wrap {
+    margin-top: 8px;
+}
+
+@media (max-width: 700px) {
+    .revenue-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small screens: only every other date label, so they don't run into each other */
+@media (max-width: 600px) {
+    .chart-column.odd .chart-label {
+        visibility: hidden;
+    }
+}

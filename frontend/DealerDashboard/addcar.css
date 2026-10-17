@@ -1,0 +1,57 @@
+/* Dealer add car page only. Navbar and panels are in ../Shared/app.css,
+   form fields (.form-group) in ../styles.css. */
+
+.layout {
+    max-width: 700px;
+}
+
+#addCarForm {
+    margin-top: 20px;
+}
+
+/* Two fields side by side, like the register page */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Same look as .form-group input in styles.css */
+.form-group textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--blue-200);
+    border-radius: 8px;
+    background: var(--blue-50);
+    color: var(--blue-900);
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--blue-500);
+    box-shadow: 0 0 0 3px var(--blue-100);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.form-actions .btn {
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-actions .btn {
+        flex: 1;
+    }
+}

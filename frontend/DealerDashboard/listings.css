@@ -1,0 +1,20 @@
+/* Dealer listings page only. Navbar, layout, panels and the car cards
+   (.car-grid / .car-card) are in ../Shared/app.css. */
+
+.layout {
+    max-width: 1100px;
+}
+
+.car-grid {
+    margin-top: 20px;
+}
+
+#listingsMessage {
+    margin: 16px 0 0;
+    text-align: center;
+}
+
+/* No message: no gap under the cards */
+#listingsMessage:empty {
+    display: none;
+}

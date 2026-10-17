@@ -6,6 +6,9 @@
 
     <title>Purchase | Carswich</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../Shared/app.css">
     <link rel="stylesheet" href="purchase.css">
@@ -14,40 +17,81 @@
 <body>
 
     <header class="navbar">
-        <a href="../Home/home.html" class="logo">🚗</a>
+        <!-- Left: logo icon, then profile pic and name after a divider -->
+        <a href="../Home/home.html" class="logo" aria-label="Carswich dashboard">
+            <svg class="logo-icon" viewBox="0 0 64 40" aria-hidden="true">
+                <path d="M6 28 L10 17 Q12 12 18 12 L40 12 Q45 12 49 17 L54 22 Q60 23 60 28 L60 30 L6 30 Z" fill="#2b7bd6"/>
+                <path d="M16 17 Q17 15 20 15 L29 15 L29 22 L13 22 Z M32 15 L39 15 Q43 15 46 19 L48 22 L32 22 Z" fill="#dbeeff"/>
+                <circle cx="18" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="18" cy="30" r="2.5" fill="#ffffff"/>
+                <circle cx="48" cy="30" r="6" fill="#0d3b66"/>
+                <circle cx="48" cy="30" r="2.5" fill="#ffffff"/>
+                <path d="M2 36 Q32 42 62 36" stroke="#7cc4fa" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </a>
 
         <div class="nav-user">
-            <span class="avatar" data-user="initials"></span>
+            <span class="avatar" data-user="initials" aria-hidden="true"></span>
             <span class="nav-user-name" data-user="fullName"></span>
         </div>
 
-        <nav class="nav-links">
-            <a href="../Home/home.html" class="nav-link">Dashboard</a>
-            <a href="../Browse/browse.html" class="nav-link">Browse cars</a>
-            <a href="../Account/account.html" class="nav-link">Account</a>
+        <!-- Right: page links. The current page is marked with aria-current="page" -->
+        <nav class="nav-links" aria-label="Main menu">
+            <a href="../Home/home.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+                Dashboard
+            </a>
+            <a href="../Browse/browse.html" class="nav-link" aria-current="page">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20 L16 16"/></svg>
+                Browse cars
+            </a>
+            <a href="../Account/account.html" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21 Q4 14 12 14 Q20 14 20 21"/></svg>
+                Account
+            </a>
         </nav>
 
-        <a href="../index.html"
-           class="btn btn-secondary btn-small nav-logout">
-            Log out
-        </a>
+        <!-- Far right: log out -->
+        <a href="../index.html" class="btn btn-secondary btn-small nav-logout">Log out</a>
     </header>
 
 
-    <main class="purchase-layout">
+    <main class="layout purchase-layout">
+        <a href="../Browse/browse.html" class="back-link" id="back-link">← Back to Browse</a>
 
-        <a href="../Browse/browse.html" class="back-link">
-            ← Back to Browse
-        </a>
-
-        <section class="card-panel purchase-panel"
-                 id="purchase-panel">
-
-            <p>Loading purchase details...</p>
-
+        <section class="card-panel purchase-panel" id="purchase-panel" aria-live="polite">
+            <p class="muted">Loading purchase details...</p>
         </section>
-
     </main>
+
+    <!-- Shown after a successful purchase (purchase.js fills it in) -->
+    <dialog class="purchase-modal" id="purchase-modal" aria-labelledby="modal-title">
+        <span class="result-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12.5 L10 17.5 L19 7"/></svg>
+        </span>
+        <h2 id="modal-title">Purchase complete</h2>
+        <p class="modal-car" id="modal-car"></p>
+        <dl class="modal-details">
+            <div>
+                <dt>Paid to</dt>
+                <dd id="modal-dealer"></dd>
+            </div>
+            <div>
+                <dt>Amount paid</dt>
+                <dd id="modal-paid"></dd>
+            </div>
+            <div>
+                <dt>New balance</dt>
+                <dd id="modal-balance"></dd>
+            </div>
+        </dl>
+        <div class="purchase-actions">
+            <a href="../PurchaseHistory/purchase-history.html" class="btn btn-primary">View purchase history</a>
+            <a href="../Browse/browse.html" class="btn btn-secondary">Keep browsing</a>
+        </div>
+        <p class="modal-redirect" id="modal-redirect" aria-live="polite"></p>
+        <button type="button" class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    </dialog>
 
 
     <p class="toast"
@@ -60,6 +104,8 @@
         <p>&copy; 2026 Carswich</p>
     </footer>
 
+    <script src="../Shared/background.js"></script>
+    <script src="../Shared/car-picture.js"></script>
     <script src="../Shared/app.js"></script>
     <script src="purchase.js"></script>
 

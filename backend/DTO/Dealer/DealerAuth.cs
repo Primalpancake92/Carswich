@@ -10,7 +10,11 @@ namespace backend.DTO
 
     // this is the response for the POST request of the API route
     public record DealerLoginResponse (
-        string Message,
-        int UserId
+    string Message,
+    int UserId,
+    string FullName,
+    string Email,
+    string DealershipName
     );
+
 }

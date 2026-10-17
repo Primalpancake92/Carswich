@@ -1,11 +1,19 @@
-// Temporary until login is connected to the backend
-const testBuyerId = 2;
+// API and buyerId (the buyer saved by the login page) come from ../Shared/app.js
 
 
 async function loadPurchaseHistory() {
+    if (!buyerId) {
+        el("purchase-list").innerHTML = `
+            <p class="error-message">
+                <a href="../Login/login.html" class="text-link">Log in</a> as a buyer to see your purchases.
+            </p>
+        `;
+        return;
+    }
+
     try {
         const response = await fetch(
-            `http://localhost:3000/api/buyers/${testBuyerId}/purchases`
+            `${API}/buyers/${buyerId}/purchases`
         );
 
         if (!response.ok) {
