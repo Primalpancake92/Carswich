@@ -41,7 +41,7 @@ namespace backend.Controllers.Buyers
                 {
                     return Results.BadRequest(new
                     {
-                        message = "This care is no longer available."
+                        message = "This car is no longer available."
                     });
                 }
 
@@ -83,28 +83,39 @@ namespace backend.Controllers.Buyers
                     car.IsSold = true;
                 }
 
+                // Setting the navigation properties lets EF Core fill in
+                // CarId, BuyerId and DealerId when it saves
                 var purchase = new Purchase
                 {
-                    CarId = car.CarId,
-                    BuyerId = buyer.UserId,
-                    DealerId = dealer.UserId,
+                    Car = car,
+                    Buyer = buyer,
+                    Dealer = dealer,
                     PaidAmount = car.Price,
                     PurchaseDate = DateTime.UtcNow
                 };
 
-                db.Purchases.Add(purchase);
+                // Link the purchase to both sides of the relationship
+                buyer.Purchases.Add(purchase);
+                dealer.Sales.Add(purchase);
 
+                // Saves the balances, the car stock and the new purchase together
                 await db.SaveChangesAsync();
 
                 return Results.Created(
                     $"/api/purchases/{purchase.PurchaseId}",
-                    new
-                    {
-                        message = "Car purchased successfully.",
-                        purchaseId = purchase.PurchaseId,
-                        buyerBalance = buyer.Balance,
-                        remainingQuantity = car.Quantity
-                    });
+                    new BuyerPurchaseResponse(
+                        "Car purchased successfully.",
+                        new PurchaseDetails(
+                            purchase.PurchaseId,
+                            purchase.CarId,
+                            purchase.BuyerId,
+                            purchase.DealerId,
+                            purchase.PaidAmount,
+                            purchase.PurchaseDate
+                        ),
+                        buyer.Balance,
+                        car.Quantity
+                    ));
             });
         }
     }

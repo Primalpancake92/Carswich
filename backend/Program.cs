@@ -31,11 +31,22 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Every start: empty the database and fill it with the same test data (DAL/DbSeeder.cs)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await DbSeeder.ResetAsync(db);
+}
+
 app.UseCors("Frontend");
 
 app.MapBuyerRegRoute();
+app.MapBuyerAuthRoute();
+app.MapBuyerProfileRoute();
 app.MapDealerRegRoute();
 app.MapDealerAuthRoute();
+app.MapDealerListRoute();
+app.MapDealerAccountRoute();
 app.MapAddCarRoute();
 app.MapGetDealerInventoryRoute();
 
@@ -43,6 +54,7 @@ app.MapCarBrowseRoute();
 app.MapCarDetailsRoute();
 
 app.MapBuyerPurchaseRoute();
+app.MapBuyerDepositRoute();
 app.MapPurchaseHistoryRoute();
 
 app.Run();
