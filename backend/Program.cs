@@ -47,8 +47,7 @@ app.MapDealerAccountRoute();
 app.MapAddCarRoute();
 app.MapGetDealerInventoryRoute();
 
-app.MapCarBrowseRoute();
-app.MapCarDetailsRoute();
+app.MapCarRoutes();
 
 app.MapPurchaseHistoryRoute();
 
