@@ -1,0 +1,178 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="carswich-frontend" name="Frontend page flow">
+    <mxGraphModel dx="1700" dy="1250" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1240" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== Area backgrounds ===== -->
+        <mxCell id="areaPublic" value="Public pages (not logged in)" style="swimlane;startSize=30;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;swimlaneFillColor=#fffbea;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1640" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="areaBuyer" value="Buyer pages (need buyerId in localStorage)" style="swimlane;startSize=30;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#f2f7fd;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="1000" height="630" as="geometry" />
+        </mxCell>
+        <mxCell id="areaDealer" value="Dealer pages: DealerDashboard/ (need dealerId in localStorage)" style="swimlane;startSize=30;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#f3faf2;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="330" width="600" height="630" as="geometry" />
+        </mxCell>
+        <mxCell id="areaState" value="How pages pass data to each other (browser storage and URLs)" style="swimlane;startSize=30;rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;swimlaneFillColor=#f8f3fa;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1000" width="1640" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Public pages ===== -->
+        <mxCell id="pLanding" value="&lt;b&gt;Landing&lt;/b&gt;&lt;br&gt;&lt;i&gt;index.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pRegister" value="&lt;b&gt;Register&lt;/b&gt;&lt;br&gt;&lt;i&gt;Register/register.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="420" y="120" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pLogin" value="&lt;b&gt;Login&lt;/b&gt;&lt;br&gt;&lt;i&gt;Login/login.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="760" y="120" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="notePublic" value="&lt;b&gt;Login&lt;/b&gt; checks the account type:&lt;br&gt;• buyer → saves buyer details → Browse&lt;br&gt;• dealer → saves dealer details → Dealer Dashboard&lt;br&gt;Public pages load no shared scripts." style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#f5f5f5;strokeColor=#999999;dashed=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="100" width="500" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Buyer pages ===== -->
+        <mxCell id="bHome" value="&lt;b&gt;Home&lt;/b&gt;&lt;br&gt;&lt;i&gt;Home/home.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="420" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="bBrowse" value="&lt;b&gt;Browse&lt;/b&gt;&lt;br&gt;&lt;i&gt;Browse/browse.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="420" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="bDetails" value="&lt;b&gt;Car Details&lt;/b&gt;&lt;br&gt;&lt;i&gt;CarDetails/car-details.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="760" y="420" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="bAccount" value="&lt;b&gt;Account&lt;/b&gt;&lt;br&gt;&lt;i&gt;Account/account.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="640" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="bPurchase" value="&lt;b&gt;Purchase&lt;/b&gt;&lt;br&gt;&lt;i&gt;Purchase/purchase.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="580" y="640" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="bHistory" value="&lt;b&gt;Purchase History&lt;/b&gt;&lt;br&gt;&lt;i&gt;PurchaseHistory/purchase-history.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="560" y="850" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="noteBuyerNav" value="&lt;b&gt;Buyer navbar (on every buyer page)&lt;/b&gt;&lt;br&gt;Home · Browse · Account · Log out → index.html&lt;br&gt;Purchase History also has a “Browse” link.&lt;br&gt;&lt;br&gt;&lt;b&gt;Login guard&lt;/b&gt;: Shared/app.js sends you to Login if there is no buyerId in localStorage." style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#f5f5f5;strokeColor=#999999;dashed=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="70" y="780" width="440" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="noteBuyerScripts" value="&lt;b&gt;Scripts every buyer page loads&lt;/b&gt;&lt;br&gt;1. Shared/background.js: background art&lt;br&gt;2. Shared/car-picture.js: car images&lt;br&gt;3. Shared/app.js: API address, logged-in buyer, navbar user, carCard(), buyButton() → purchase.html?id=&lt;br&gt;4. the page's own .js" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#f5f5f5;strokeColor=#999999;dashed=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="800" y="760" width="230" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Dealer pages ===== -->
+        <mxCell id="dDash" value="&lt;b&gt;Dashboard&lt;/b&gt;&lt;br&gt;&lt;i&gt;dashboard.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="420" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="dAccount" value="&lt;b&gt;Dealer Account&lt;/b&gt;&lt;br&gt;&lt;i&gt;dealeraccount.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="420" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="dListings" value="&lt;b&gt;Listings&lt;/b&gt;&lt;br&gt;&lt;i&gt;listings.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="640" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="dAddCar" value="&lt;b&gt;Add Car&lt;/b&gt;&lt;br&gt;&lt;i&gt;addcar.html&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="640" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="noteDealer" value="&lt;b&gt;Dealer navbar (on every dealer page)&lt;/b&gt;&lt;br&gt;Dashboard · Listings · Add car · Account · Log out&lt;br&gt;&lt;br&gt;&lt;b&gt;Scripts&lt;/b&gt;: Shared/background.js, dealer-nav.js (navbar name; Log out clears dealer keys). Dashboard and Listings also load car-picture.js and dealer-cars.js.&lt;br&gt;&lt;br&gt;&lt;b&gt;Login guard&lt;/b&gt;: Dashboard and Dealer Account send you to Login if there is no dealerId." style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#f5f5f5;strokeColor=#999999;dashed=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="770" width="540" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Storage / URL ===== -->
+        <mxCell id="sLocal" value="&lt;b&gt;localStorage&lt;/b&gt; (kept between pages and visits)&lt;br&gt;Login writes: buyerId, buyerFullName, buyerEmail, buyerPhone, buyerAddress, buyerBalance&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;or dealerId, dealerName, dealerFullName, dealerEmail&lt;br&gt;app.js, Account and Purchase refresh the buyer values. Dealer pages read dealerId.&lt;br&gt;Dealer Log out removes the dealer keys." style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1060" width="640" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="sSession" value="&lt;b&gt;sessionStorage&lt;/b&gt;&lt;br&gt;carswich-last-purchase: saved by Purchase after buying, so a reload shows the confirmation again. Cleared when Purchase redirects to Purchase History." style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="740" y="1060" width="420" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="sUrl" value="&lt;b&gt;URL query string&lt;/b&gt; (which car)&lt;br&gt;?id={carId}: Browse / Car Details / Account → Car Details or Purchase&lt;br&gt;?car={carId}#wallet: Purchase → Account (Add funds), so Account can link back to that car" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="1060" width="460" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Public edges ===== -->
+        <mxCell id="e1" value="Log in" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#fffbea;" edge="1" parent="1" source="pLanding" target="pLogin">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="180" y="90" />
+              <mxPoint x="860" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="Register" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#fffbea;" edge="1" parent="1" source="pLanding" target="pRegister">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="links to each other&lt;br&gt;Register → Login after sign-up" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;startArrow=block;fontSize=10;labelBackgroundColor=#fffbea;" edge="1" parent="1" source="pRegister" target="pLogin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="buyer login&lt;br&gt;(saves buyerId)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pLogin" target="bBrowse">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="235" />
+              <mxPoint x="490" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="dealer login&lt;br&gt;(saves dealerId)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#82b366;strokeWidth=2;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pLogin" target="dDash">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="235" />
+              <mxPoint x="1220" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="Log out" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#b85450;exitX=0.1;exitY=0;exitDx=0;exitDy=0;entryX=0.3;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="areaBuyer" target="pLanding">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="Log out (clears dealer keys)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#b85450;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="areaDealer" target="pLanding">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1380" y="295" />
+              <mxPoint x="230" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== Buyer edges ===== -->
+        <mxCell id="b1" value="Browse cars" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#f2f7fd;" edge="1" parent="1" source="bHome" target="bBrowse">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="Edit account / View all purchases&lt;br&gt;(#details, #purchases)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#f2f7fd;" edge="1" parent="1" source="bHome" target="bAccount">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="click a car card (?id=) →&lt;br&gt;← Back to browse" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;startArrow=block;fontSize=10;labelBackgroundColor=#f2f7fd;" edge="1" parent="1" source="bBrowse" target="bDetails">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="Buy (?id=)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#f2f7fd;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="bBrowse" target="bPurchase">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="Buy (?id=) ↓&lt;br&gt;↑ car name link" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;startArrow=block;fontSize=10;labelBackgroundColor=#f2f7fd;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="bDetails" target="bPurchase">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" value="← Add funds (?car=id#wallet)&lt;br&gt;Continue to your purchase (?id=) →" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;startArrow=block;fontSize=10;labelBackgroundColor=#f2f7fd;" edge="1" parent="1" source="bAccount" target="bPurchase">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b7" value="after buying: auto-redirect&lt;br&gt;in 5s, or “View purchase history”" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#f2f7fd;" edge="1" parent="1" source="bPurchase" target="bHistory">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Dealer edges ===== -->
+        <mxCell id="d1" value="Account button" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#f3faf2;" edge="1" parent="1" source="dDash" target="dAccount">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="View listings ↓&lt;br&gt;↑ Back to dashboard" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;startArrow=block;fontSize=10;labelBackgroundColor=#f3faf2;" edge="1" parent="1" source="dDash" target="dListings">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="Add car →&lt;br&gt;← after the car is saved" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;startArrow=block;fontSize=10;labelBackgroundColor=#f3faf2;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="dDash" target="dAddCar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" value="Add car" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#f3faf2;" edge="1" parent="1" source="dListings" target="dAddCar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Legend ===== -->
+        <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;: solid arrow = link or redirect · double arrow = both ways · red dashed = Log out · grey dashed box = note" style="text;html=1;align=left;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1210" width="900" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

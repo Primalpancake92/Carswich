@@ -5,7 +5,6 @@ using backend.Routes.addCar;
 using backend.Routes.Inventory;
 using backend.Routes.Cars;
 using backend.Routes.Purchases;
-using backend.Controllers.Buyers;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -40,9 +39,7 @@ using (var scope = app.Services.CreateScope())
 
 app.UseCors("Frontend");
 
-app.MapBuyerRegRoute();
-app.MapBuyerAuthRoute();
-app.MapBuyerProfileRoute();
+app.MapBuyerRoutes();
 app.MapDealerRegRoute();
 app.MapDealerAuthRoute();
 app.MapDealerListRoute();
@@ -53,8 +50,6 @@ app.MapGetDealerInventoryRoute();
 app.MapCarBrowseRoute();
 app.MapCarDetailsRoute();
 
-app.MapBuyerPurchaseRoute();
-app.MapBuyerDepositRoute();
 app.MapPurchaseHistoryRoute();
 
 app.Run();

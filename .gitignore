@@ -11,3 +11,4 @@ obj/
 .DS_Store
 .env
 appsettings.*.local.json
+*.drawio
