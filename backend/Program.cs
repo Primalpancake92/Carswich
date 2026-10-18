@@ -49,7 +49,7 @@ app.MapGetDealerInventoryRoute();
 
 app.MapCarRoutes();
 
-app.MapPurchaseHistoryRoute();
+app.MapPurchaseRoutes();
 
 app.Run();
 
