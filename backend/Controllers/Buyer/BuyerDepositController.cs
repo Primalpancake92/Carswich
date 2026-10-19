@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers.Buyers
 {
-    // POST /api/buyers/deposit: adds money to the buyer's balance (Wallet tab on the Account page)
     public static class BuyerDepositController
     {
         public static async Task<Results<Ok<BuyerDepositResponse>, NotFound<BuyerErrorResponse>, BadRequest<BuyerErrorResponse>>> Deposit(
